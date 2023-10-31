@@ -17,8 +17,6 @@ h1 {
     font-weight: 900;
 }
 
-
-
 hr {
     margin: 0;
 }
@@ -348,7 +346,7 @@ a:hover {
     margin: 0;
 }
 
-.movie-detail {
+.movie-details {
     background-color: #232323;
     padding: 30px;
     border-radius: 15px;
