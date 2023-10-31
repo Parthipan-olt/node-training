@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="main-container">
+    <header>
+        <div class="logo-filters pt-3">
+            <div class="logo mt-2 mb-3">
+                <img src="images/logo.png" class="rounded-circle" height="70" alt="image">
+                <a href="/">
+                    <h1 class="m-0 mt-3 ml-2">Film Buff</h1>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container my-5">
+        <div class="movie-detail mb-5">
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <% let posterPath %>
+                    <% if (data.poster_path) { %>
+                    <% posterPath = "https://image.tmdb.org/t/p/original/" + data.poster_path; %>
+
+                    <% } else { %>
+                    <% posterPath = "/images/ihcoaih.jpeg"%>
+                    <% } %>
+                    <img src="<%= posterPath %>" alt="poster" class="img-fluid rounded">
+                </div>
+
+                <div class="col-md-8 px-4">
+                    <h2 class="mb-3"><span><%= data.title %></span></h2>
+                    <h5 class="mb-3 mx-0"><span><%= data.original_title %></span></h5>
+                    <div class="row mb-3">
+                        <div class="col-md-6 px-0">
+                            <p> <span class="text-danger">Adult:</span> <% if (data.Adult) {%>
+                                <span>Yes</span>
+                                <% }else{%>
+                                <span>No</span> <% } %>
+                            </p>
+
+                            <p><span class="text-danger">Genres:</span>
+                                <span> <%= data.genres.map(genre => genre.name).join(', ') %></span></p>
+
+                            <p><span class="text-danger">Total Vote:</span>
+                                <span><%= data.vote_count %></span>
+                            </p>
+
+                            <p><span class="text-danger">Language:</span>
+                                <span><%= data.original_language %></span></p>
+                        </div>
+
+                        <div class=" ml-5 mb-5">
+                            <p><span class="text-danger">Popularity:</span>
+                                <span><%= data.popularity%></span>
+                            </p>
+
+                            <p><span class="text-danger">Release Date:</span> <span>
+                                    <%= data.release_date%></span></p>
+
+                            <p><span class="text-danger">Average Votings:</span> <span>
+                                    <%= data.vote_average %></span></p>
+
+                            <p><span class="text-danger">ID:</span> <span><%= data.id%></span></p>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-danger mx-0" href="/">Back to Search</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-white p-4 bg-dark mb-5 rounded">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-2"><span class="bold">Overview:</span> <span><%= data.overview %></span></p>
+                </div>
+                <div class="col-md-6 text-center">
+                    <% let backdropPath %>
+                    <% if (data.backdrop_path) { %>
+                    <% backdropPath = "https://image.tmdb.org/t/p/original/" + data.backdrop_path; %>
+
+                    <% } else { %>
+                    <% backdropPath = "/images/ihcoaih.jpeg"%>
+                    <% } %>
+                    <img alt="Backdrop" class="img-fluid rounded" src="<%= backdropPath %>">
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+</body>
+
+</html>
