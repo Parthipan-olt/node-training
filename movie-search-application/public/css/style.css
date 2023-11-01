@@ -2,7 +2,7 @@ input {
     width: 200px;
     font-size: 18px;
     border-style: none;
-    background-color: rgb(252, 243, 243);
+    background-color: #fcf3f3;
     border-radius: 10px 0 0 10px;
     padding: 8px;
     margin-right: 0;
@@ -13,7 +13,7 @@ a {
 }
 
 h1 {
-    color: rgb(255, 255, 255);
+    color: #ffffff;
     font-weight: 900;
 }
 
@@ -24,15 +24,6 @@ hr {
 input[type="checkbox"] {
     display: block;
     width: fit-content;
-}
-
-main {
-    height: 580px;
-    margin: 0;
-    padding: 0;
-    background-size: 100% 100%;
-    background-position: center;
-    background-attachment: fixed;
 }
 
 #filterButton {
@@ -61,7 +52,6 @@ main {
     border-radius: 0 10px 10px 0;
     border: none;
     background-color: #777777;
-
     color: #fff;
     cursor: pointer;
     margin-left: 0;
@@ -95,7 +85,7 @@ main {
 .filters p {
     margin-right: 15px;
     font-weight: 200;
-    color: rgb(255, 255, 255);
+    color: #ffffff;
     cursor: pointer;
     font-size: 15px;
     font-variant: small-caps;
@@ -105,7 +95,6 @@ main {
     display: inline-block;
     margin-top: 20px;
     margin-right: 20px;
-
 }
 
 .search-results {
@@ -116,7 +105,7 @@ main {
     background-color: #f0dfdf;
 }
 
-.movie-container p {
+.search-results p {
     font-size: 15px;
     font-weight: 900;
     margin-top: 5px;
@@ -125,15 +114,16 @@ main {
     word-wrap: break-word;
     word-break: break-word;
     cursor: pointer;
+    color: #000;
 }
 
 .footer-content {
-    color: rgb(138, 131, 131);
+    color: #8a8383;
     font-size: smaller;
 }
 
 .modal-backdrop {
-    background-color: rgba(0, 0, 0, .0001) !important;
+    background-color: #00000000 !important;
 }
 
 .modal {
@@ -189,7 +179,7 @@ main {
 .more-filters {
     display: none;
     width: 200px;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: #ffffffb3;
     position: absolute;
     z-index: 1000;
     right: 5px;
@@ -209,22 +199,13 @@ main {
     background-color: #f0dfdf
 }
 
-.pageButtons {
-    padding: 10px 15px;
-    border: none;
-    border-radius: none !important;
-    font-weight: 600;
-    margin: 3px;
-    color: #ce91cd;
-}
-
 .movie-image:hover {
     cursor: pointer;
 }
 
 .active-page {
     background-color: #ce91cd;
-    color: #fff;
+    color: #fff !important;
 }
 
 .search-filters {
@@ -242,6 +223,12 @@ main {
 .search-content {
     text-align: center;
 }
+
+.backdrop-img {
+    width: fit-content;
+    box-sizing: border-box;
+}
+
 
 .application-descriptions {
     display: flex;
@@ -311,17 +298,25 @@ a:hover {
 }
 
 .page-numbers {
-    width: 50px;
-    max-width: 50px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 0 !important;
+    font-weight: 600;
+    margin: 3px;
+    color: #ce91cd;
 }
 
 .results-container-two p:hover {
-    color: red;
+    color: #ff0000;
     border: none !important;
 }
 
 .results-container-two .movie-detail:hover {
-    border: solid red 2px;
+    border: solid #ff0000 2px;
+}
+
+.more-details {
+    padding-left: 15px;
 }
 
 .page-number-div {
@@ -346,12 +341,11 @@ a:hover {
     margin: 0;
 }
 
-.movie-details {
+.movie-info {
     background-color: #232323;
     padding: 30px;
     border-radius: 15px;
 }
-
 
 @media screen and (max-width: 769px) {
     .col-md-8 {
@@ -369,6 +363,10 @@ a:hover {
         justify-content: center;
     }
 
+    .movie-details-row {
+        flex-wrap: nowrap !important;
+    }
+
     .logo {
         justify-content: center;
     }
@@ -379,8 +377,16 @@ a:hover {
         display: block;
     }
 
+    .movie-details-row {
+        flex-wrap: nowrap !important;
+    }
+
     .filters {
         justify-content: center;
+    }
+
+    .more-details {
+        padding: 0 15px !important;
     }
 
     .about-application {
@@ -397,6 +403,8 @@ a:hover {
         padding-bottom: 0;
     }
 
+
+
     .search-filters {
         display: block;
     }
@@ -404,6 +412,10 @@ a:hover {
     .filters p {
         font-size: 12px;
         margin-right: 10px;
+    }
+
+    .more-details {
+        padding: 15px !important;
     }
 
     .filters {
@@ -435,6 +447,10 @@ a:hover {
         font-size: 10px;
         margin-right: 8px;
     }
+    .more-details {
+        padding: 0 15px !important;
+    }
+
 }
 
 @media (max-width :370px) {
@@ -453,4 +469,14 @@ a:hover {
         padding-left: 5px;
         width: 150px;
     }
+
+    .img-fluid {
+        max-width: 200px !important;
+    }
+}
+
+
+.more-details {
+    margin-left: 0 !important;
+    padding: 0 15px;
 }

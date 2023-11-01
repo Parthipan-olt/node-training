@@ -3,16 +3,17 @@
 
 <head>
     <meta charset="UTF-8">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Details</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
 <body class="main-container">
+
     <header>
         <div class="logo-filters pt-3">
             <div class="logo mt-2 mb-3">
@@ -23,83 +24,123 @@
             </div>
         </div>
     </header>
+    <main>
+        <div class="container my-5">
+            <div class="movie-info mb-5">
+                <!-- Display error if no results found -->
+                <% if (typeof data === 'undefined') { %>
+                <p><%= error %></p>
 
-    <main class="container my-5">
-        <div class="movie-details mb-5">
-            <div class="row">
-                <div class="col-md-4 text-center">
-                    <% let posterPath %>
-                    <% if (data.poster_path) { %>
-                    <% posterPath = "https://image.tmdb.org/t/p/original/" + data.poster_path; %>
+                <!--Else display the results  -->
+                <% } else { %>
 
-                    <% } else { %>
-                    <% posterPath = "/images/ihcoaih.jpeg"%>
-                    <% } %>
-                    <img src="<%= posterPath %>" alt="poster" class="img-fluid rounded">
-                </div>
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        <% let posterPath %>
 
-                <div class="col-md-8 px-4">
-                    <h2 class="mb-3 mx-0"><span><%= data.title %></span></h2>
-                    <h5 class="mb-3 mx-0"><span><%= data.original_title %></span></h5>
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <p> <span class="text-danger">Adult:</span> <% if (data.Adult) {%>
-                                <span>Yes</span>
-                                <% }else{%>
-                                <span>No</span> <% } %>
-                            </p>
+                        <!-- Display the poster path if available -->
+                        <% if (data.poster_path) { %>
+                        <% posterPath = "https://image.tmdb.org/t/p/original/" + data.poster_path; %>
 
-                            <p><span class="text-danger">Genres:</span>
-                                <span> <%= data.genres.map(genre => genre.name).join(', ') %></span></p>
+                        <!-- Else use a placeholder -->
+                        <% } else { %>
+                        <% posterPath = "/images/placeholder.jpeg" %>
+                        <% } %>
 
-                            <p><span class="text-danger">Total Vote:</span>
-                                <span><%= data.vote_count %></span>
-                            </p>
-
-                            <p><span class="text-danger">Language:</span>
-                                <span><%= data.original_language %></span></p>
-                        </div>
-
-                        <div class=" ml-5 mb-5">
-                            <p><span class="text-danger">Popularity:</span>
-                                <span><%= data.popularity%></span>
-                            </p>
-
-                            <p><span class="text-danger">Release Date:</span> <span>
-                                    <%= data.release_date%></span></p>
-
-                            <p><span class="text-danger">Average Votings:</span> <span>
-                                    <%= data.vote_average %></span></p>
-
-                            <p><span class="text-danger">ID:</span> <span><%= data.id%></span></p>
-                        </div>
+                        <img src="<%= posterPath %>" alt="poster" class="img-fluid mb-2 rounded">
                     </div>
 
-                    <a href="/"><button class="btn btn-danger mx-0">Back to Search</button></a>
+                    <div class="col-md-8 px-4">
+                        <h2 class="mb-3 mx-0"><span><%= data.title %></span></h2>
+                        <h5 class="mb-3 mx-0"><span><%= data.original_title %></span></h5>
+
+                        <div class="row movie-details-row mb-3">
+
+                            <!-- display movie details -->
+                            <div class="col-md-6 pr-0">
+
+                                <p>
+                                    <span class="text-danger">Adult:</span>
+                                    <!-- If Adult content  display-yes else display-no -->
+                                    <% if (data.Adult) { %>
+                                    <span>Yes</span>
+                                    <% } else { %>
+                                    <span>No</span>
+                                    <% } %>
+                                </p>
+
+                                <p>
+                                    <span class="text-danger">Genres:</span>
+                                    <span><%= data.genres.map(genre => genre.name).join(', ') %></span>
+                                </p>
+
+                                <p>
+                                    <span class="text-danger">Total Vote:</span>
+                                    <span><%= data.vote_count %></span>
+                                </p>
+
+                                <p>
+                                    <span class="text-danger">Language:</span>
+                                    <span><%= data.original_language %></span>
+                                </p>
+                            </div>
+
+                            <div class="more-details ">
+                                <p>
+                                    <span class="text-danger">Popularity:</span>
+                                    <span><%= data.popularity %></span>
+                                </p>
+
+                                <p>
+                                    <span class="text-danger">Release Date:</span>
+                                    <span><%= data.release_date %></span>
+                                </p>
+
+                                <p>
+                                    <span class="text-danger">Average Votings:</span>
+                                    <span><%= data.vote_average %></span>
+                                </p>
+
+                                <p>
+                                    <span class="text-danger">ID:</span>
+                                    <span><%= data.id %></span>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- redirect to home page -->
+                        <a href="/"><button class="btn btn-danger mx-0">Back to Home</button></a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="text-white p-4 bg-dark mb-5 rounded">
-            <div class="row">
-                <div class="col-md-6">
-                    <p class="mb-2"><span class="bold">Overview:</span> <span><%= data.overview %></span></p>
-                </div>
-                <div class="col-md-6 text-center">
-                    <% let backdropPath %>
-                    <% if (data.backdrop_path) { %>
-                    <% backdropPath = "https://image.tmdb.org/t/p/original/" + data.backdrop_path; %>
+            <div class="text-white p-4 bg-dark mb-5 rounded">
+                <div class="row">
 
-                    <% } else { %>
-                    <% backdropPath = "/images/ihcoaih.jpeg"%>
-                    <% } %>
-                    <img alt="Backdrop" class="img-fluid rounded" src="<%= backdropPath %>">
+                    <div class="col-md-6">
+                        <p class="mb-2"><span class="bold">Overview:</span> <span><%= data.overview %></span></p>
+                    </div>
+
+                    <div class="col-md-6 text-center">
+                        <% let backdropPath %>
+
+                        <!-- Display backdrop image if available -->
+                        <% if (data.backdrop_path) { %>
+                        <% backdropPath = "https://image.tmdb.org/t/p/original/" + data.backdrop_path; %>
+
+                        <!-- else display placeholder image -->
+                        <% } else { %>
+                        <% backdropPath = "/images/placeholder.jpeg" %>
+                        <% } %>
+
+                        <div>
+                            <img alt="Backdrop" class="img-fluid backdrop-img rounded" src="<%= backdropPath %>">
+                        </div>
+                    </div>
                 </div>
+                <% } %>
             </div>
         </div>
     </main>
-
-
 </body>
 
 </html>

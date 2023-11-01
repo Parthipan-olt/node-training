@@ -1,17 +1,25 @@
 const axios = require('axios');
 
-function getApi(url, callback) {
-    console.log(url)
+// fetch movies from the API
+function fetchDataFromApi(url) {
+  return new Promise((resolve, reject) => {
     axios.get(url)
-        .then(response => {
-            callback(null, response.data);
-        })
-        .catch(error => {
-            console.error('An error occurred:', error);
-            callback(error, null);
-        });
+      .then((response) => {
+        if (response.data) {
+          //success
+          resolve(response.data);
+        } else {
+          // if no data found
+          reject(new Error('No data found in the response.'));
+        }
+      })
+      .catch((error) => {
+        //error
+        reject(error);
+      });
+  });
 }
 
 module.exports = {
-    getApi
+  fetchDataFromApi,
 };

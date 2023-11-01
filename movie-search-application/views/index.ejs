@@ -15,6 +15,7 @@
             </a>
         </div>
         <div class="search-filters">
+            <!-- genres -->
             <div class="filters mt-5 mx-5">
                 <p class="sort" value="18">DRAMA</p>
                 <p class="sort" value="10749">ROMANCE</p>
@@ -23,9 +24,10 @@
                 <p class="sort" value="27">HORROR</p>
                 <p id="more" class="mr-0">MORE</p>
             </div>
-            <form class="form" action="/get-movie-results/:title/:page">
+            <!-- form - search movies -->
+            <form class="form" action="/get-movie-results">
                 <div class="search-box mt-4 mx-2">
-                    <input type="text" name="searchBox" id="searchBox" placeholder="Search...">
+                    <input type="text" name="searchBox" id="searchBox" placeholder="Search..." maxlength="20">
                     <button class="btn " type="submit" id="searchButton">
                         <i class="fa fa-search search-icon"></i>
                     </button>
@@ -33,6 +35,8 @@
             </form>
         </div>
     </div>
+
+    <!-- More genres -->
     <div class="more-filters ">
         <p class="filter-options" value="12">Adventure</p>
         <hr>
@@ -56,15 +60,23 @@
         <hr>
         <p class="filter-options" value="37">Western</p>
     </div>
-    <div class="results-container">
-    </div>
+
+    <!-- results -->
+    <div class="results-container"></div>
+
+    <!-- page buttons -->
     <div class="pagination-container text-center"></div>
+
+    <!-- carousel -->
     <div id="carousel" class="carousel slide" data-ride="carousel">
+
         <ol class="carousel-indicators">
             <li data-target="#carousel" data-slide-to="0" class="active"></li>
             <li data-target="#carousel" data-slide-to="1"></li>
             <li data-target="#carousel" data-slide-to="2"></li>
         </ol>
+
+        <!-- carousel images -->
         <div class="carousel-inner">
             <div class="item active">
                 <img src="images/drama.jpg" alt="Los Angeles" style="width:100%;">
@@ -82,15 +94,19 @@
                 <img src="images/horror.jpg" alt="New york" style="width:100%;">
             </div>
         </div>
+
         <a class="left carousel-control" href="#carousel" data-slide="prev">
             <span class="glyphicon glyphicon-chevron-left"></span>
             <span class="sr-only">Previous</span>
         </a>
+
         <a class="right carousel-control" href="#carousel" data-slide="next">
             <span class="glyphicon glyphicon-chevron-right"></span>
             <span class="sr-only">Next</span>
         </a>
+
     </div>
+    <!-- About Movie search application -->
     <div class="about-application">
         <h3 class="text-center"><strong>Discover Your next cinematic adventure with our movie search
                 application!</strong></h3>
@@ -127,6 +143,7 @@
             </div>
         </div>
     </div>
+    <!-- Social media links -->
     <div class="social-media mt-3">
         <a href="#">
             <i class="fa fa-instagram application"></i>
@@ -139,7 +156,7 @@
         </a>
     </div>
     <p class="text-center footer-content">Find us on | Instagram | Facebook | Twitter</p>
-    <p class="text-center footer-content">© 2023 FILM BUFF, A FANDOM COMPANY. All Rights Reserved</p>
+    <p class="text-center footer-content"> &copy; 2023 FILM BUFF, A FANDOM COMPANY. All Rights Reserved</p>
 </body>
 
 </html>

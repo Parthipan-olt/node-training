@@ -1,12 +1,18 @@
 const express = require('express');
 
 const router = express.Router();
-const movieResults = require('../api/controller/GetMovies');
+const MovieController = require('../api/controller/GetMovies'); // Import the MovieController
 
-router.get('/', movieResults.loadIndex);
-router.post('/get-movie-results/:title/:page', movieResults.movieData);
+// Render the index page
+router.get('/', MovieController.renderIndexPage);
 
-router.use('/genre/:id/:page', movieResults.searchGenre);
-router.get('/details', movieResults.redirectToDetails);
+// Handle the post request to fetch movie data
+router.post('/get-movie-results/:title/:page', MovieController.fetchMovieData);
+
+// Get results by Genre
+router.use('/genre/:id/:page', MovieController.searchMoviesByGenre);
+
+// Details page for a selected movie
+router.get('/details', MovieController.getMovieDetails);
 
 module.exports = router;
