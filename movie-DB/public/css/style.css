@@ -1,0 +1,221 @@
+body {
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+label {
+  font-size: 16px;
+  font-weight: 600;
+  align-self: flex-end;
+  margin-right: 0.9375rem;
+  margin-left: 30px;
+}
+
+/* form -  index page & edit page */
+.form-content {
+  flex-wrap: nowrap !important;
+  gap: 20px
+}
+
+/* form fields-  index page & edit page */
+.form-input-controls {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 0;
+}
+
+input,
+select {
+  width: 70%;
+  padding: 5px;
+}
+
+form button {
+  justify-content: end;
+  align-self: self-end;
+}
+
+/* List page */
+table {
+  word-wrap: break-word;
+  width: 100%;
+}
+
+th {
+  width: 12%;
+}
+
+td button {
+  width: 30%;
+  display: inline-block;
+  border-radius: 2px !important
+}
+
+/* action cell in table - list page */
+.action-cell {
+  width: 17% !important;
+}
+
+/* divs in detail and list page */
+.details,
+.list div {
+  display: block !important;
+}
+
+.details {
+  width: 80%;
+  margin: 50px auto;
+  vertical-align: text-top !important;
+  word-wrap: break-word;
+}
+
+.details p {
+  align-self: self-start;
+  display: inline-block !important;
+  width: 25%;
+}
+
+/* span - reviews- details page */
+span {
+  width: 75%;
+  display: inline-block;
+  vertical-align: text-top !important;
+}
+
+/* p - reviews- details page */
+.review p {
+  display: inline;
+  width: 100%;
+}
+
+
+/* media queries */
+@media (max-width :1280px) {
+  h1 {
+    font-size: 25px;
+  }
+
+  .form-content {
+    flex-wrap: wrap !important;
+    gap: 0
+  }
+
+  input,
+  select {
+    width: 80%;
+  }
+
+  label {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  table td,
+  table th {
+    font-size: 10px;
+    padding: 2px !important;
+  }
+
+  td button {
+    font-size: 10px !important;
+  }
+}
+
+@media (max-width :768px) {
+  h1 {
+    font-size: 22px;
+  }
+
+  input,
+  select {
+    width: 68%;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  label {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  table td,
+  table th {
+    font-size: 7px;
+    padding: 2px !important;
+  }
+
+  td button {
+    font-size: 6px !important;
+  }
+}
+
+@media (max-width :450px) {
+
+  h1 {
+    font-size: 18px;
+  }
+
+  label {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  table button {
+    padding: 5px 2px !important;
+    font-size: 5px !important;
+  }
+
+  input,
+  label,
+  .form-input-controls {
+    font-size: 12px;
+  }
+
+  form button {
+    font-size: 10px !important;
+  }
+
+  table td,
+  table th {
+    font-size: 6px;
+    padding: 2px !important;
+  }
+}
+
+@media (max-width :370px) {
+  table button {
+    font-size: 4px !important;
+  }
+
+  table td,
+  table th {
+    font-size: 6px;
+    padding: 2px !important;
+  }
+
+  input,
+  label,
+  .form-input-controls {
+    display: block !important;
+    font-size: 9px;
+  }
+
+  form button {
+    font-size: 9px !important;
+  }
+
+  input,
+  select {
+    width: 100%;
+  }
+
+  h1 {
+    font-size: 13px;
+  }
+
+}
