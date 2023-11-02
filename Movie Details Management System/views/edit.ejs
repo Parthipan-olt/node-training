@@ -6,53 +6,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
     integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-  <title>Edit</title>
+  <title>Movie Details Management System</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-  <div class="px-2">
+  <div>
     <header>
-      <div class="row py-3 bg-primary">
-        <a href="/"><h1 class="col-xl-12 col-lg-12 col-md-12 col-sm-12 my-0 text-white">Movie Details Management System</h1></a>
+      <div class=" py-3 bg-primary">
+        <a href="/">
+          <h1 class="col-xl-12 col-lg-12 col-md-12 col-sm-12 my-0 text-white">Movie Details Management System</h1>
+        </a>
       </div>
     </header>
 
     <main>
+      <div class="mt-4 container">
+        <div class="row">
+          <form action="/submit" class="form">
+            <div class="col-xl-12 justify-content-between">
 
-      <div class="mt-5 container">
-        <form action="/edit" class="form">
-          <div class="row  d-flex justify-content-between">
-            <div class="col-xl-6 col-md-12 col-sm-12">
               <label for="movieTitle">Title</label>
               <input type="text" id="">
-            </div>
 
-            <div class="col-xl-6 col-md-12 col-sm-12">
               <label for="movieDescription">Description</label>
               <input type="text" id="movieDescription">
-            </div>
-          </div>
 
-          <div class="row">
-            <div class="col-xl-6 col-md-12 col-sm-12">
               <label for="director">Director</label>
               <input type="text" id="director">
-            </div>
 
-            <div class="col-xl-6 col-md-12 col-sm-12">
               <label for="releaseYear">Release Year</label>
               <input type="text" id="releaseYear">
-            </div>
-          </div>
 
-          <div class="row">
-            <div class="col-xl-6 col-md-12 col-sm-12">
               <label for="language">Language</label>
               <input type="text" id="language">
-            </div>
 
-            <div class="col-xl-6 col-md-12 col-sm-12">
               <label for="genres">Genre</label>
               <select name="genres" id="genres">
                 <option value="" disabled selected>Choose an Option</option>
@@ -62,22 +50,17 @@
                 <option value="Horror">Horror</option>
                 <option value="Crime">Crime</option>
               </select>
-            </div>
-          </div>
 
-          <div class="row">
-            <div class="col-xl-6 col-md-12 col-sm-12">
               <label for="runtime">Runtime</label>
               <input type="text" id="runtime">
-            </div>
 
-            <div class="col-xl-6 col-md-12 col-sm-12 justify-content-end text-right">
-              <button class="btn btn-success col-xl-2 col-md-12 col-sm-12" type="submit">Update</button>
+              <div class="submit-button-container d-flex justify-content-end">
+                <button class="btn btn-primary " type="submit">Update</button></div>
             </div>
-          </div>
-        </form>
+            
+          </form>
+        </div>
       </div>
-
     </main>
   </div>
 </body>

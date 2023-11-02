@@ -10,34 +10,20 @@ label {
   font-size: 16px;
   font-weight: 600;
   align-self: flex-end;
-  margin-right: 0.9375rem;
-  margin-left: 30px;
-}
-
-/* form -  index page & edit page */
-.form-content {
-  flex-wrap: nowrap !important;
-  gap: 20px
-}
-
-/* form fields-  index page & edit page */
-.form-input-controls {
-  display: flex;
-  gap: 10px;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  padding: 0;
+  width: 20%;
+  display: inline-block;
 }
 
 input,
 select {
-  width: 70%;
-  padding: 5px;
+  width: 100%;
+  margin-bottom: 15px;
+  display: inline-block;
+  padding:5px
 }
 
-form button {
-  justify-content: end;
-  align-self: self-end;
+.submit-button-container {
+  box-sizing: border-box;
 }
 
 /* List page */
@@ -100,21 +86,6 @@ span {
     font-size: 25px;
   }
 
-  .form-content {
-    flex-wrap: wrap !important;
-    gap: 0
-  }
-
-  input,
-  select {
-    width: 80%;
-  }
-
-  label {
-    margin-right: 0;
-    margin-left: 0;
-  }
-
   table td,
   table th {
     font-size: 10px;
@@ -129,18 +100,6 @@ span {
 @media (max-width :768px) {
   h1 {
     font-size: 22px;
-  }
-
-  input,
-  select {
-    width: 68%;
-    margin-right: 0;
-    margin-left: 0;
-  }
-
-  label {
-    margin-right: 0;
-    margin-left: 0;
   }
 
   table td,
@@ -158,11 +117,6 @@ span {
 
   h1 {
     font-size: 18px;
-  }
-
-  label {
-    margin-right: 0;
-    margin-left: 0;
   }
 
   table button {
@@ -201,7 +155,6 @@ span {
   input,
   label,
   .form-input-controls {
-    display: block !important;
     font-size: 9px;
   }
 
