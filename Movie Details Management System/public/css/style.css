@@ -19,32 +19,30 @@ select {
   width: 100%;
   margin-bottom: 15px;
   display: inline-block;
-  padding:5px
+  padding: 5px
 }
 
 .submit-button-container {
   box-sizing: border-box;
 }
 
-/* List page */
+/* List page table*/
 table {
   word-wrap: break-word;
   width: 100%;
 }
 
-th {
-  width: 12%;
+th,
+td {
+  padding: 5px !important;
 }
 
 td button {
   width: 30%;
   display: inline-block;
-  border-radius: 2px !important
-}
-
-/* action cell in table - list page */
-.action-cell {
-  width: 17% !important;
+  border-radius: 2px !important;
+  word-wrap: normal;
+  font-size: 10px;
 }
 
 /* divs in detail and list page */
@@ -60,23 +58,35 @@ td button {
   word-wrap: break-word;
 }
 
+/* lables for the details */
 .details p {
   align-self: self-start;
   display: inline-block !important;
   width: 25%;
 }
 
-/* span - reviews- details page */
+/* span - movie details - details page */
 span {
   width: 75%;
   display: inline-block;
   vertical-align: text-top !important;
+  margin-bottom: 15px;
+}
+
+/* delete review  button icon */
+.trash-icon {
+  font-size: 12px;
 }
 
 /* p - reviews- details page */
 .review p {
   display: inline;
   width: 100%;
+}
+
+/* add review button icon */
+.add-review button {
+  font-size: 12px;
 }
 
 
@@ -86,14 +96,13 @@ span {
     font-size: 25px;
   }
 
-  table td,
-  table th {
-    font-size: 10px;
-    padding: 2px !important;
+  td button {
+    font-size: 9px !important;
   }
 
-  td button {
-    font-size: 10px !important;
+  .details {
+    width: auto;
+    font-size: 12px;
   }
 }
 
@@ -102,54 +111,37 @@ span {
     font-size: 22px;
   }
 
-  table td,
-  table th {
-    font-size: 7px;
-    padding: 2px !important;
-  }
-
-  td button {
-    font-size: 6px !important;
+  .details {
+    width: auto;
+    font-size: 12px;
   }
 }
 
 @media (max-width :450px) {
-
   h1 {
     font-size: 18px;
-  }
-
-  table button {
-    padding: 5px 2px !important;
-    font-size: 5px !important;
   }
 
   input,
   label,
   .form-input-controls {
-    font-size: 12px;
+    font-size: 10px;
   }
 
   form button {
     font-size: 10px !important;
   }
 
-  table td,
-  table th {
-    font-size: 6px;
-    padding: 2px !important;
+  .details {
+    width: auto;
+    font-size: 12px;
   }
+
 }
 
 @media (max-width :370px) {
-  table button {
-    font-size: 4px !important;
-  }
-
-  table td,
-  table th {
-    font-size: 6px;
-    padding: 2px !important;
+  h1 {
+    font-size: 13px;
   }
 
   input,
@@ -167,8 +159,27 @@ span {
     width: 100%;
   }
 
-  h1 {
-    font-size: 13px;
+  .details {
+    width: auto;
+    font-size: 12px;
   }
 
+  /* labels for the movie details */
+  .details>p {
+    width: 40%;
+  }
+
+  /* span - reviews- details page */
+  span {
+    width: 60%;
+  }
+
+  td button {
+    width: 75% !important;
+    font-size: 7px !important;
+  }
+
+  table {
+    font-size: 8px;
+  }
 }
