@@ -37,12 +37,14 @@ table {
 th,
 td {
   padding: 4px 2px !important;
+  /* divide the width equally for all columns */
   width: calc(12.5%) !important;
 }
 
+/* View, Edit, Delete Buttons - List page */
 td a {
   width: 30%;
-  padding: 0 5px;
+  padding: 2px 5px;
   word-wrap: normal;
   font-size: 10px;
   display: inline-block;
@@ -82,70 +84,67 @@ span {
   width: 100%;
 }
 
-/* add review button icon */
-
-
 /* media queries */
 @media (max-width :1280px) {
   h1 {
-    font-size: 28px;
+    font-size: 30px;
   }
 
   table {
-    font-size: 14px;
-  }
-
-  .details {
-    width: auto;
-    font-size: 12px;
+    font-size: 16px;
   }
 
   table a {
     font-size: 10px;
+  }
+
+  .details {
+    width: auto;
+    font-size: 16px;
   }
 
   .modal,
   .modal button,
   .modal h4,
   .modal a {
-    font-size: 11px;
+    font-size: 16px;
     left: auto !important;
   }
 }
 
 @media (max-width :768px) {
   h1 {
-    font-size: 22px;
+    font-size: 28px;
   }
 
   table {
-    font-size: 11px;
+    font-size: 13px;
   }
 
   select {
-    font-size: 11px;
+    font-size: 13px;
   }
 
   table a {
     width: 100%;
     display: block;
     margin-bottom: 5px;
-    font-size: 10px;
+    font-size: 13px;
   }
 
   .details {
     width: auto;
-    font-size: 12px;
+    font-size: 13px;
   }
 
-  /* modal - details page */
+  /* Delete confirmation modal - list page */
   .modal {
     position: absolute;
   }
 
   .modal,
   .modal button,
-  .modal h4 {
+  .modal h4,.modal a {
     font-size: 10px;
     left: auto !important;
   }
@@ -175,10 +174,6 @@ span {
     font-size: 10px;
   }
 
-  td button {
-    width: 75%;
-  }
-
   .details {
     width: auto;
     font-size: 12px;
@@ -187,7 +182,11 @@ span {
 
 @media (max-width :370px) {
   h1 {
-    font-size: 13px;
+    font-size: 15px;
+  }
+
+  h5 {
+    font-size: 14px
   }
 
   input,
@@ -200,6 +199,18 @@ span {
     font-size: 9px !important;
   }
 
+  /* span - reviews- details page */
+  span {
+    width: 60%;
+  }
+
+  table {
+    font-size: 8px;
+  }
+
+  td a {
+    font-size: 8px;
+  }
 
   .details {
     width: auto;
@@ -211,16 +222,4 @@ span {
     width: 40%;
   }
 
-  /* span - reviews- details page */
-  span {
-    width: 60%;
-  }
-
-  td a {
-    font-size: 8px;
-  }
-
-  table {
-    font-size: 8px;
-  }
 }

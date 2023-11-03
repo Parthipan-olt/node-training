@@ -8,5 +8,4 @@ router.use('/submit', controller.renderListPage);
 router.get('/view', controller.renderDetailsPage);
 router.get('/edit', controller.renderEditPage);
 
-
 module.exports = router;
