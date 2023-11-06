@@ -4,10 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Details Management System</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
     integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-  <title>Movie Details Management System</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link rel="stylesheet" href="css/style.css">
+  <script src="javascripts/script.js" defer></script>
 </head>
 
 <body>
@@ -23,24 +25,24 @@
     <main>
       <div class="my-4 container">
         <div class="row">
-          <form action="/submit" class="form">
+          <form id="addNewMovie">
             <div class="col-xl-12 justify-content-between">
               <h3 class="mb-5">Add a movie</h3>
 
               <label for="movieTitle">Title</label>
-              <input type="text" id="movieTitle">
+              <input type="text" id="title" name="title">
 
               <label for="movieDescription">Description</label>
-              <input type="text" id="movieDescription" maxlength="20">
+              <input type="text" id="movieDescription" maxlength="20" name="description">
 
               <label for="director">Director</label>
-              <input type="text" id="director">
+              <input type="text" id="director" name="director">
 
               <label for="releaseYear">Release Date/Year</label>
-              <input type="text" id="releaseYear">
+              <input type="text" id="releaseYear" name="release_date">
 
               <label for="language">Language</label>
-              <input type="text" id="language" maxlength="10">
+              <input type="text" id="language" maxlength="10" name="language">
 
               <label for="genres">Genre</label>
               <select name="genres" id="genres">
@@ -53,10 +55,10 @@
               </select>
 
               <label for="runtime">Runtime</label>
-              <input type="text" id="runtime" maxlength="5">
+              <input type="text" id="runtime" maxlength="5" name="runtime">
 
               <div class="d-flex justify-content-end">
-                <button class="btn btn-primary " type="submit">Submit</button></div>
+                <button class="btn btn-primary" type="submit">Submit</button></div>
             </div>
 
           </form>

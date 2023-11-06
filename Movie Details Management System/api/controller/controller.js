@@ -5,9 +5,13 @@ const renderIndexPage = async (req, res) => {
 const renderEditPage = async (req, res) => {
   res.render('edit');
 };
-
-const renderListPage = async (req, res) => {
+const addNewMovie = async (req, res) => {
   res.render('list');
+
+};
+
+const renderList = async (req, res) => {
+
 };
 
 const renderDetailsPage = async (req, res) => {
@@ -16,7 +20,8 @@ const renderDetailsPage = async (req, res) => {
 
 module.exports = {
   renderIndexPage,
-  renderListPage,
+  addNewMovie,
   renderEditPage,
   renderDetailsPage,
+  renderList,
 };
