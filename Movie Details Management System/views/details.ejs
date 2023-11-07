@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="javascripts/script.js" defer></script>
 </head>
 
 <body>
@@ -38,8 +40,14 @@
                     <div>
                         <div class="add-review d-flex justify-content-between mb-5">
                             <h5>Reviews</h5>
-                            <a href="/add-review" class=" bg-success py-1 px-2 rounded">Add +</a>
+                            <button class="py-1 px-2 rounded add-review-button bg-white text-success border-success" title="Add New Review">Add +</button>
                         </div>
+
+                        <div class="review-input-div mb-5">
+                            <input type="text" class="review-input" maxlength="100" name="review">
+                            <button type="submit" class="btn review-submit-button">ADD</button>
+                        </div>
+
                         <div>
                             <div class="review d-flex justify-content-between mb-3">
                                 <div>
@@ -54,8 +62,9 @@
                                     </p>
                                 </div>
                                 <div>
-                                    <a href="/delete-review" class=" bg-danger p-1 px-2 ml-2 rounded"><i
-                                            class=" trash-icon fa fa-trash" aria-hidden="true"></i></a>
+                                    <a href="/delete-review" class="bg-white p-1 px-2 ml-2 rounded"
+                                        title="Delete Review"><i class=" trash-icon fa fa-trash"
+                                            aria-hidden="true"></i></a>
                                 </div>
                             </div>
 
@@ -72,8 +81,9 @@
                                     </p>
                                 </div>
                                 <div>
-                                    <a href="/delete-review" class=" bg-danger p-1 px-2  ml-2 rounded"><i
-                                            class=" trash-icon fa fa-trash" aria-hidden="true"></i></a>
+                                    <a href="/delete-review" class="bg-white p-1 px-2  ml-2 rounded"
+                                        title="Delete Review"><i class=" trash-icon fa fa-trash"
+                                            aria-hidden="true"></i></a>
                                 </div>
                             </div>
                         </div>

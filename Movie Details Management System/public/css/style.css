@@ -6,6 +6,7 @@ a {
   text-decoration: none !important;
   color: #fff;
   align-self: center;
+  cursor: pointer;
 }
 
 a:hover {
@@ -78,10 +79,32 @@ span {
   font-size: 12px;
 }
 
+.reviews i {
+  color: #000;
+  font-size: 100%;
+}
+
 /* p - reviews- details page */
 .review p {
   display: inline;
   width: 100%;
+}
+
+.add-review a {
+  color: #308d37;
+  border: solid 2px #308d37;
+}
+
+/* input for review */
+.review-input-div {
+  position: relative;
+  display: none;
+}
+
+/* submit button for review */
+.review-submit-button {
+  position: absolute;
+  right: 0;
 }
 
 /* media queries */
@@ -98,7 +121,8 @@ span {
     font-size: 10px;
   }
 
-  .details {
+  .details,
+  .review-submit-button {
     width: auto;
     font-size: 16px;
   }
@@ -132,7 +156,8 @@ span {
     font-size: 13px;
   }
 
-  .details {
+  .details,
+  .review-submit-button {
     width: auto;
     font-size: 13px;
   }
@@ -144,7 +169,8 @@ span {
 
   .modal,
   .modal button,
-  .modal h4,.modal a {
+  .modal h4,
+  .modal a {
     font-size: 10px;
     left: auto !important;
   }
@@ -174,7 +200,8 @@ span {
     font-size: 10px;
   }
 
-  .details {
+  .details,
+  .review-submit-button {
     width: auto;
     font-size: 12px;
   }
@@ -212,7 +239,8 @@ span {
     font-size: 8px;
   }
 
-  .details {
+  .details,
+  .review-submit-button {
     width: auto;
     font-size: 12px;
   }

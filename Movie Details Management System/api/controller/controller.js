@@ -1,3 +1,5 @@
+const service = require('../services/services');
+
 const renderIndexPage = async (req, res) => {
   res.render('index');
 };
@@ -5,13 +7,9 @@ const renderIndexPage = async (req, res) => {
 const renderEditPage = async (req, res) => {
   res.render('edit');
 };
-const addNewMovie = async (req, res) => {
+
+const addNewMovie = (req, res, next) => {
   res.render('list');
-
-};
-
-const renderList = async (req, res) => {
-
 };
 
 const renderDetailsPage = async (req, res) => {
@@ -23,5 +21,4 @@ module.exports = {
   addNewMovie,
   renderEditPage,
   renderDetailsPage,
-  renderList,
 };
