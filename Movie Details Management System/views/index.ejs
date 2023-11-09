@@ -25,7 +25,8 @@
     <main>
       <div class="my-4 container">
         <div class="row">
-          <form id="addNewMovie" action="" method="">
+          <form id="addNewMovie" action="/" method="POST">
+
             <div class="col-xl-12 justify-content-between">
               <h3 class="mb-5">Add a movie</h3>
 
@@ -39,13 +40,13 @@
               <input type="text" id="director" name="director" maxlength="20">
 
               <label for="releaseYear">Release Date/Year</label>
-              <input type="date" id="releaseYear" name="release_date">
+              <input type="date" id="releaseYear" name="releaseDate">
 
               <label for="language">Language</label>
               <input type="text" id="language" maxlength="10" name="language">
 
-              <label for="genres">Genre</label>
-              <select name="genres" id="genres">
+              <label for="genre">Genre</label>
+              <select name="genre" id="genres">
                 <option value="" disabled selected>Choose an Option</option>
                 <option value="Action">Action</option>
                 <option value="Drama">Drama</option>

@@ -38,7 +38,7 @@ table {
 th,
 td {
   padding: 4px 2px !important;
-  /* divide the width equally for all columns */
+  /* divide the width equally for all columns in the table */
   width: calc(12.5%) !important;
 }
 
