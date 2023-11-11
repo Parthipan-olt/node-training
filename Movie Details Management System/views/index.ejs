@@ -25,25 +25,25 @@
     <main>
       <div class="my-4 container">
         <div class="row">
-          <form id="addNewMovie" action="/" method="POST">
+          <form id="addNewMovie" action="/list">
 
             <div class="col-xl-12 justify-content-between">
               <h3 class="mb-5">Add a movie</h3>
 
               <label for="movieTitle">Title</label>
-              <input type="text" id="title" name="title" maxlength="20">
+              <input type="text" id="title" name="title" maxlength="100">
 
               <label for="movieDescription">Description</label>
-              <input type="text" id="movieDescription" maxlength="30" name="description">
+              <input type="text" id="movieDescription"  name="description" maxlength="100">
 
               <label for="director">Director</label>
-              <input type="text" id="director" name="director" maxlength="20">
+              <input type="text" id="director" name="director" maxlength="100">
 
               <label for="releaseYear">Release Date/Year</label>
               <input type="date" id="releaseYear" name="releaseDate">
 
               <label for="language">Language</label>
-              <input type="text" id="language" maxlength="10" name="language">
+              <input type="text" id="language" maxlength="20" name="language" >
 
               <label for="genre">Genre</label>
               <select name="genre" id="genres">
