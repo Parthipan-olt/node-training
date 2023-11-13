@@ -14,9 +14,9 @@
 </head>
 
 <body>
-    <div class="px-2">
+    <div>
         <header>
-            <div class="row py-3 bg-primary">
+            <div class=" py-3 bg-primary">
                 <a href="/">
                     <h1 class="col-xl-12 col-lg-12 col-md-12 col-sm-12 my-0 text-white">Movie Details Management System
                     </h1>
@@ -26,69 +26,63 @@
         <main>
             <div class="details container">
                 <div class="details bg-secondary text-white p-3 rounded">
-                    <p><b>Title: </b></p><span>Test Movie</span>
-                    <p><b>Release Year: </b></p><span> 2000</span>
-                    <p><b>Director: </b> </p><span>Test Director</span>
-                    <p><b>Genre: </b> </p><span> Action</span>
-                    <p><b>Language: </b> </p><span> English</span>
-                    <p><b>Runtime: </b></p><span>90</span>
-                    <p><b>Description: </b></p><span>Lorem ipsum, dolor adipisicing elit. Ex temporibus dolor</span>
-                    <p><b>Number of Reviews:</b></p><span>5</span>
+
+
+                    <p><b>Title: </b></p><span><%= movieDetails.title %></span>
+                    <p><b>Release Date: </b></p><span> <%= movieDetails.release_date %></span>
+                    <p><b>Director: </b> </p><span><%= movieDetails.director %></span>
+                    <p><b>Genre: </b> </p><span><%= movieDetails.genre %></span>
+                    <p><b>Language: </b> </p><span><%= movieDetails.language %></span>
+                    <p><b>Runtime: </b></p><span><%= movieDetails.runtime %></span>
+                    <p><b>Description: </b></p><span><%= movieDetails.description %></span>
+                    <p><b>Number of Reviews:</b></p><span><%= reviews.review_count %></span>
                 </div>
 
                 <div class="reviews">
                     <div>
                         <div class="add-review d-flex justify-content-between mb-5">
                             <h5>Reviews</h5>
-                            <button class="py-1 px-2 rounded add-review-button bg-white text-success border-success" title="Add New Review">Add +</button>
+                            <button class="py-1 px-2 rounded add-review-button bg-white text-success border-success"
+                                title="Add New Review">Add +</button>
                         </div>
 
                         <div class="review-input-div mb-5">
-                            <input type="text" class="review-input" maxlength="200" name="review">
-                            <button type="submit" class="btn review-submit-button">ADD</button>
+                            <form action="/add-review?movieId=<%= movieDetails.movie_id%>" method="post">
+                                <input type="text" class="review-input" maxlength="200" name="review">
+                                <button type="submit" class="btn review-submit-button">ADD</button>
+                            </form>
                         </div>
 
+                        <% if (typeof reviews!==null ) { %>
                         <div>
-                            <div class="review d-flex justify-content-between mb-3">
-                                <div>
-                                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cumque eos in eaque
-                                        fuga
-                                        unde
-                                        laboriosam itaque, quas odit enim quidem minus nisi sequi libero tempora?
-                                        Corrupti
-                                        nam
-                                        iure
-                                        id officia.
-                                    </p>
-                                </div>
-                                <div>
-                                    <a href="/delete-review" class="bg-white p-1 px-2 ml-2 rounded"
-                                        title="Delete Review"><i class=" trash-icon fa fa-trash"
-                                            aria-hidden="true"></i></a>
-                                </div>
-                            </div>
+                            <% reviews.forEach((item) => { %>
+
+                            <% if (item.review_id!==null) { %>
 
                             <div class="review d-flex justify-content-between mb-3">
                                 <div>
-                                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cumque eos in eaque
-                                        fuga
-                                        unde
-                                        laboriosam itaque, quas odit enim quidem minus nisi sequi libero tempora?
-                                        Corrupti
-                                        nam
-                                        iure
-                                        id officia.
+                                    <p><%= item.review %>
                                     </p>
                                 </div>
                                 <div>
-                                    <a href="/delete-review" class="bg-white p-1 px-2  ml-2 rounded"
-                                        title="Delete Review"><i class=" trash-icon fa fa-trash"
-                                            aria-hidden="true"></i></a>
+                                    <a href="/delete-review?reviewId=<%= item.review_id %>&movieId=<%=movieDetails.movie_id  %>"
+                                        class="bg-white p-1 px-2 ml-2 rounded" title="Delete Review"><i
+                                            class=" trash-icon fa fa-trash" aria-hidden="true"></i></a>
                                 </div>
                             </div>
+                            <% } %>
+                            <% }) %>
+
+                            <% } else { %>
+                            <div class="details bg-secondary text-white p-3 rounded text-center">
+                                <p class="m-0">NO RESULTS FOUND!!!</p>
+                                <% } %>
+                            </div>
+
                         </div>
                     </div>
                 </div>
+
             </div>
         </main>
     </div>

@@ -3,11 +3,14 @@
 
 <head>
   <meta charset="UTF-8">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
     integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
   <title>Movie Details Management System</title>
   <link rel="stylesheet" href="css/style.css">
+  <script src="javascripts/script.js" defer></script>
+
 </head>
 
 <body>
@@ -23,37 +26,37 @@
     <main>
       <div class="mt-4 container">
         <div class="row">
-          <form action="/edit-movie-details" class="edit-movie-details">
+          <form action="/edit-movie-details?movieId=<%= movieId %>" method="POST" name="form">
             <div class="col-xl-12 justify-content-between">
               <h3 class="mb-5">Edit Details</h3>
 
               <label for="movieTitle">Title</label>
-              <input type="text" id="movieTitle">
+              <input type="text" id="movieTitle" value="<%= record.title %>" name="title">
 
               <label for="movieDescription">Description</label>
-              <input type="text" id="movieDescription" maxlength="20">
+              <input type="text" id="movieDescription" maxlength="20" value="<%= record.description %>" name="description"> 
 
               <label for="director">Director</label>
-              <input type="text" id="director">
+              <input type="text" id="director" value="<%= record.director %>" name="director">
 
               <label for="releaseYear">Release Date/Year</label>
-              <input type="text" id="releaseYear">
+              <input type="date" id="releaseYear" class=" date-field" value="<%= record.new_date %>" name="releaseDate">
 
               <label for="language">Language</label>
-              <input type="text" id="language" maxlength="10">
+              <input type="text" id="language" maxlength="10" value="<%= record.language %>" name="language">
 
-              <label for="genres">Genre</label>
-              <select name="genres" id="genres">
-                <option value="" disabled selected>Choose an Option</option>
-                <option value="Action">Action</option>
-                <option value="Drama">Drama</option>
-                <option value="Romance">Romance</option>
-                <option value="Horror">Horror</option>
-                <option value="Crime">Crime</option>
+              <label for="genre">Genre</label>
+              <select name="genre" id="genres">
+                  <option value="" disabled selected>Choose an Option</option>
+                  <option value="Action">Action</option>
+                  <option value="Drama">Drama</option>
+                  <option value="Romance">Romance</option>
+                  <option value="Horror">Horror</option>
+                  <option value="Crime">Crime</option>
               </select>
 
               <label for="runtime">Runtime</label>
-              <input type="text" id="runtime" maxlength="5">
+              <input type="text" id="runtime" maxlength="5" value="<%= record.runtime %>" name="runtime">
 
               <div class="d-flex justify-content-end">
                 <button class="btn btn-primary " type="submit">Update</button></div>

@@ -25,28 +25,28 @@
     <main>
       <div class="my-4 container">
         <div class="row">
-          <form id="addNewMovie" action="/list">
+          <form id="addNewMovie" action="/list" method="POST" name="form">
 
-            <div class="col-xl-12 justify-content-between">
+            <div class="col-xl-12 ">
               <h3 class="mb-5">Add a movie</h3>
 
               <label for="movieTitle">Title</label>
-              <input type="text" id="title" name="title" maxlength="100">
+              <input type="text" id="title" name="title" maxlength="100" required>
 
               <label for="movieDescription">Description</label>
-              <input type="text" id="movieDescription"  name="description" maxlength="100">
+              <input type="text" id="movieDescription"  name="description" maxlength="100" required>
 
               <label for="director">Director</label>
-              <input type="text" id="director" name="director" maxlength="100">
+              <input type="text" id="director" name="director" maxlength="100" required>
 
               <label for="releaseYear">Release Date/Year</label>
-              <input type="date" id="releaseYear" name="releaseDate">
+              <input type="date" id="releaseYear" name="releaseDate" required>
 
               <label for="language">Language</label>
-              <input type="text" id="language" maxlength="20" name="language" >
+              <input type="text" id="language" maxlength="20" name="language" required>
 
               <label for="genre">Genre</label>
-              <select name="genre" id="genres">
+              <select name="genre" id="genres" required>
                 <option value="" disabled selected>Choose an Option</option>
                 <option value="Action">Action</option>
                 <option value="Drama">Drama</option>
@@ -56,7 +56,7 @@
               </select>
 
               <label for="runtime">Runtime</label>
-              <input type="text" id="runtime" maxlength="5" name="runtime">
+              <input type="text" id="runtime" maxlength="5" name="runtime" required>
 
               <div class="d-flex justify-content-end">
                 <button class="btn btn-primary" type="submit">Submit</button></div>
