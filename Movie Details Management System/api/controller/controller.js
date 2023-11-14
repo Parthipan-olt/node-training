@@ -1,152 +1,133 @@
 const services = require('../services/services');
 
-const renderIndexPage = async (req, res) => {
+// Load root
+const handleRootPage = async (req, res) => {
   try {
-    res.render('index');
-  } catch (error) {
-    res.render('error', {
-      error,
+    const records = await services.retrieveAllRecords();
+    res.render('index', {
+      records,
     });
+  } catch (error) { // error
+    res.render('error', { error });
   }
 };
 
-
-const getFormData = async (req, res) => {
-  services.postForm(req.body)
-    .then(() => {
-      res.redirect('list');
-    })
-    .catch((error) => {
-      res.render('error', {
-        error,
-      });
-    });
+const handleAddMoviePage = async (req, res) => {
+  try {
+    res.render('add-movie');
+  } catch (error) { // error
+    res.render('error', { error });
+  }
 };
 
-const renderListingPage = async (req, res) => {
-  services.getAllRecords()
-    .then((response) => {
-      res.render('list', {
-        records: response,
-      });
-    })
-    .catch((error) => {
-      res.render('error', {
-        error,
-      });
-    });
+// Add new movie
+const handleAddMovie = async (req, res) => {
+  try {
+    await services.addMovie(req.body);
+    res.redirect('/');
+  } catch (error) { // error
+    res.render('error', { error });
+  }
 };
 
-const movieRecordToDelete = (req, res) => {
-  const {
-    movieId,
-  } = req.query;
-  services.deleteRecord(movieId)
-    .then(() => {
-      res.redirect('list');
-    })
-    .catch((error) => {
-      res.render('error', {
-        error,
-      });
-    });
+// Delete a Movie
+const handleMovieDelete = async (req, res) => {
+  try {
+    const {
+      movieId,
+    } = req.query;
+    await services.deleteMovie(movieId);
+    res.redirect(`/?${movieId}`);
+  } catch (error) { // error
+    res.render('error', { error });
+  }
 };
 
-const renderEditingPage = async (req, res) => {
-  const {
-    movieId,
-  } = req.query;
-  services.loadSelectedRecord(movieId)
-    .then((response) => {
-      res.render('edit', {
-        record: response[0],
-        movieId,
-      });
-    })
-    .catch((error) => {
-      res.render('error', {
-        error,
-      });
+// Retrieve details to populate form
+const loadDetailsToEdit = async (req, res) => {
+  try {
+    const {
+      movieId,
+    } = req.query;
+    const record = (await services.getDetailsToEdit(movieId))[0];
+    res.render('edit', {
+      record,
+      movieId,
     });
+  } catch (error) { // error
+    res.render('error', { error });
+  }
 };
 
-const movieRecordUpdate = async (req, res) => {
-  const formData = req.body;
-  const movieID = req.query.movieId;
-  services.updateRecord(formData, movieID)
-    .then(() => {
-      res.redirect('list');
-    })
-    .catch((error) => {
-      res.render('error', {
-        error,
-      });
-    });
+// Update the movie details
+const handleMovieUpdate = async (req, res) => {
+  try {
+    const formData = req.body;
+    const movieID = req.query.movieId;
+    await services.updateMovie(formData, movieID);
+    res.redirect('/');
+  } catch (error) { // error
+    res.render('error', { error });
+  }
 };
 
-const viewDetails = async (req, res) => {
-  const {
-    movieId,
-  } = req.query;
-  services.getMovieDetails(movieId)
-    .then((response) => {
-      console.log(response);
-      res.render('details', {
-        movieDetails: response.movieDetails ? response.movieDetails : response,
-        reviews: response.reviews ? response.reviews : null,
-      });
-    }).catch((error) => {
-      res.render('error', {
-        error,
-      });
+// Retrieve movie details and reviews for details page
+const handleRetrieveMovieDetails = async (req, res) => {
+  try {
+    const {
+      movieId,
+    } = req.query;
+    const {
+      movieDetails,
+      reviews,
+    } = await services.getMovieDetails(movieId);
+    res.render('details', {
+      movieDetails,
+      reviews,
     });
+  } catch (error) { // error
+    res.render('error', { error });
+  }
 };
 
-const addReview = async (req, res) => {
-  const {
-    movieId,
-  } = req.query;
-  const {
-    review,
-  } = req.body;
-
-  services.addReview(movieId, review)
-    .then(() => {
-      res.redirect(`/view?movieId=${movieId}`);
-    })
-    .catch((error) => {
-      res.render('error', {
-        error,
-      });
-    });
+// Add review
+const handleAddReview = async (req, res) => {
+  try {
+    const {
+      movieId,
+    } = req.query;
+    const {
+      review,
+    } = req.body;
+    await services.addReviewToMovie(movieId, review);
+    res.redirect(`/details?movieId=${movieId}`);
+  } catch (error) { // error
+    res.render('error', { error });
+  }
 };
 
-const deleteReview = async (req, res) => {
-  const {
-    movieId,
-  } = req.query;
-  const {
-    reviewId,
-  } = req.query;
-  services.deleteReview(reviewId)
-    .then(() => {
-      res.redirect(`/view?movieId=${movieId}`);
-    })
-    .catch((error) => {
-      res.render('error', {
-        error,
-      });
-    });
+// Delete Review
+const handleDeleteReview = async (req, res) => {
+  try {
+    const {
+      movieId,
+      reviewId,
+    } = req.query;
+    await services.deleteReview(reviewId);
+    res.redirect(`/details?movieId=${movieId}`);
+  } catch (error) { // error
+    res.render('error', { error });
+  }
 };
 
 module.exports = {
-  renderIndexPage,
-  postFormData,
-  deleteRecord,
-  renderEditPage,
-  updateRecord,
-  renderListPage,
-  viewDetails,
-  addReview,
-  deleteReview,
+  handleRootPage,
+  handleAddMovie,
+  handleMovieDelete,
+  loadDetailsToEdit,
+  handleMovieUpdate,
+  handleRetrieveMovieDetails,
+  handleAddReview,
+  handleDeleteReview,
+  handleAddMoviePage,
 };

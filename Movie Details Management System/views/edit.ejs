@@ -10,11 +10,10 @@
   <title>Movie Details Management System</title>
   <link rel="stylesheet" href="css/style.css">
   <script src="javascripts/script.js" defer></script>
-
 </head>
 
 <body>
-  <div>
+  <div class="mb-4 mb-4">
     <header>
       <div class=" py-3 bg-primary">
         <a href="/">
@@ -25,38 +24,43 @@
 
     <main>
       <div class="mt-4 container">
+        <% if (record) { %>
         <div class="row">
-          <form action="/edit-movie-details?movieId=<%= movieId %>" method="POST" name="form">
+
+
+          <form action="/edit-movie-details?movieId=<%= movieId %>" method="POST" name="movieForm">
             <div class="col-xl-12 justify-content-between">
               <h3 class="mb-5">Edit Details</h3>
 
               <label for="movieTitle">Title</label>
-              <input type="text" id="movieTitle" value="<%= record.title %>" name="title">
+              <input type="text" id="movieTitle" value="<%= record.title %>" name="title" required>
 
               <label for="movieDescription">Description</label>
-              <input type="text" id="movieDescription" maxlength="20" value="<%= record.description %>" name="description"> 
+              <input type="text" id="movieDescription" maxlength="20" value="<%= record.description %>"
+                name="description" required>
 
               <label for="director">Director</label>
-              <input type="text" id="director" value="<%= record.director %>" name="director">
+              <input type="text" id="director" value="<%= record.director %>" name="director" required>
 
               <label for="releaseYear">Release Date/Year</label>
-              <input type="date" id="releaseYear" class=" date-field" value="<%= record.new_date %>" name="releaseDate">
+              <input type="date" id="releaseYear" name="releaseDate" value="<%= record.new_date %>" required
+                min="1895-10-28">
 
               <label for="language">Language</label>
-              <input type="text" id="language" maxlength="10" value="<%= record.language %>" name="language">
-
+              <input type="text" id="language" maxlength="10" value="<%= record.language %>" name="language" required>
+              <% let genre = record.genre %>
               <label for="genre">Genre</label>
-              <select name="genre" id="genres">
-                  <option value="" disabled selected>Choose an Option</option>
-                  <option value="Action">Action</option>
-                  <option value="Drama">Drama</option>
-                  <option value="Romance">Romance</option>
-                  <option value="Horror">Horror</option>
-                  <option value="Crime">Crime</option>
+              <select name="genre" id="genres" required>
+                <option value="" disabled <% if (!genre) { %>selected<% } %>>Choose an Option</option>
+                <option value="Action" <% if (genre === 'Action') { %>selected<% } %>>Action</option>
+                <option value="Drama" <% if (genre === 'Drama') { %>selected<% } %>>Drama</option>
+                <option value="Romance" <% if (genre === 'Romance') { %>selected<% } %>>Romance</option>
+                <option value="Horror" <% if (genre === 'Horror') { %>selected<% } %>>Horror</option>
+                <option value="Crime" <% if (genre === 'Crime') { %>selected<% } %>>Crime</option>
               </select>
 
               <label for="runtime">Runtime</label>
-              <input type="text" id="runtime" maxlength="5" value="<%= record.runtime %>" name="runtime">
+              <input type="number" id="runtime" min="0" max="99999" value="<%= record.runtime %>" name="runtime" required>
 
               <div class="d-flex justify-content-end">
                 <button class="btn btn-primary " type="submit">Update</button></div>
@@ -64,6 +68,12 @@
           </form>
         </div>
       </div>
+
+      <% } else{%>
+      <div class="text-center d-inline">
+        <h4 class="text-danger">No Records!!!</h4>
+      </div>
+      <% } %>
     </main>
   </div>
 </body>

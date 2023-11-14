@@ -18,7 +18,14 @@ label {
   font-weight: 600;
   align-self: flex-end;
   width: 20%;
-  display: inline-block;
+  display: inline;
+}
+
+/* Disable spin buttons of number feild */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 input,
@@ -31,15 +38,19 @@ select {
 
 /* List page table*/
 table {
-  word-wrap: break-word;
+  word-wrap: break-word !important;
   max-width: 100%;
+  white-space: nowrap;
 }
 
-th,
-td {
-  padding: 4px 2px !important;
-  /* divide the width equally for all columns in the table */
-  width: calc(12.5%) !important;
+td,
+th {
+  padding: 5px !important;
+  width: 200px !important;
+  max-width: 200px !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* View, Edit, Delete Buttons - List page */
@@ -107,10 +118,11 @@ span {
   right: 0;
 }
 
+
 /* media queries */
 @media (max-width :1280px) {
   h1 {
-    font-size: 30px;
+    font-size: 32px;
   }
 
   table {
@@ -121,10 +133,20 @@ span {
     font-size: 10px;
   }
 
+  /* Reviews heading */
+  h3,
+  h4 {
+    font-size: 15px
+  }
+
   .details,
   .review-submit-button {
     width: auto;
     font-size: 16px;
+  }
+
+  .nav {
+    font-size: 13px;
   }
 
   .modal,
@@ -138,7 +160,7 @@ span {
 
 @media (max-width :768px) {
   h1 {
-    font-size: 28px;
+    font-size: 30px;
   }
 
   table {
@@ -153,13 +175,17 @@ span {
     width: 100%;
     display: block;
     margin-bottom: 5px;
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .details,
   .review-submit-button {
     width: auto;
     font-size: 13px;
+  }
+
+  .nav {
+    font-size: 12px;
   }
 
   /* Delete confirmation modal - list page */
@@ -187,23 +213,26 @@ span {
     font-size: 18px;
   }
 
+  form button,
+  table,
+  table a,
   input,
   label {
-    font-size: 10px;
-  }
-
-  form button {
     font-size: 10px !important;
   }
 
-  table {
-    font-size: 10px;
+  h3,
+  h4 {
+    font-size: 15px
   }
 
   .details,
   .review-submit-button {
     width: auto;
     font-size: 12px;
+  }
+  .nav {
+    font-size: 10px;
   }
 }
 
@@ -212,8 +241,9 @@ span {
     font-size: 15px;
   }
 
-  h5 {
-    font-size: 14px
+  h3,
+  h4 {
+    font-size: 12px
   }
 
   input,
@@ -241,10 +271,11 @@ span {
 
   .details,
   .review-submit-button {
-    width: auto;
     font-size: 12px;
   }
-
+  .nav {
+    font-size: 8px;
+  }
   /* labels for the movie details */
   .details>p {
     width: 40%;

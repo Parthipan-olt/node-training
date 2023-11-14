@@ -1,163 +1,51 @@
 const db = require('../../models/model');
 
-function postForm(form) {
-  const formData = {
-    title: form.title,
-    description: form.description,
-    director: form.director,
-    releaseDate: form.releaseDate,
-    language: form.language,
-    genre: form.genre,
-    runtime: form.runtime,
-  };
-  return new Promise((resolve, reject) => {
-    db.addRecord(formData)
-      .then((response) => {
-        if (response) {
-          resolve(response);
-        } else {
-          reject(new Error('Cannot Add record'));
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        reject(error);
-      });
-  });
+// Add new movie record - input:user input
+async function addMovie(input) {
+  return db.addRecord(input);
 }
 
-function getAllRecords() {
-  return new Promise((resolve, reject) => {
-    db.fetchRecord()
-      .then((response) => {
-        if (response) {
-          resolve(response);
-        } else {
-          reject(new Error('Cannot Add record'));
-        }
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
+// Retrieve all movies
+async function retrieveAllRecords() {
+  return db.fetchAllRecords();
 }
 
-function deleteRecord(movieId) {
-  return new Promise((resolve, reject) => {
-    db.deleteRecord(movieId)
-      .then((response) => {
-        if (response) {
-          resolve(response);
-        } else {
-          reject(new Error('Cannot Add record'));
-        }
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
+// Delete a record by movie ID
+async function deleteMovie(movieId) {
+  return db.deleteRecord(movieId);
 }
 
-function loadSelectedRecord(movieId) {
-  return new Promise((resolve, reject) => {
-    db.selectedMovieDetails(movieId)
-      .then((response) => {
-        if (response) {
-          resolve(response);
-        } else {
-          reject(new Error('Cannot Add record'));
-        }
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
+// Retrieve the details of the selected movie for the form
+async function getDetailsToEdit(movieId) {
+  return db.retrieveDetailsToEdit(movieId);
 }
 
-function updateRecord(form, movieId) {
-  const formData = {
-    title: form.title,
-    description: form.description,
-    director: form.director,
-    releaseDate: form.releaseDate,
-    language: form.language,
-    genre: form.genre,
-    runtime: form.runtime,
-  };
-  return new Promise((resolve, reject) => {
-    db.updateRecord(formData, movieId)
-      .then((response) => {
-        if (response) {
-          resolve(response);
-        } else {
-          reject(new Error('Cannot Add record'));
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        reject(error);
-      });
-  });
+// update movie details with user input and movie ID
+async function updateMovie(input, movieId) {
+  return db.updateRecord(input, movieId);
 }
 
-function getMovieDetails(movieId) {
-  console.log(movieId,':movie')
-  return new Promise((resolve, reject) => {
-    db.fetchSelectedMovie(movieId)
-      .then((response) => {
-        if (response) {
-          resolve(response);
-        } else {
-          reject(new Error('Cannot Add record'));
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        reject(error);
-      });
-  });
+// Get all details of the movie - user input and reviews
+async function getMovieDetails(movieId) {
+  return db.fetchSelectedMovie(movieId);
 }
 
-function addReview(movieId, review) {
-  return new Promise((resolve, reject) => {
-    db.addReview(movieId, review)
-      .then((response) => {
-        if (response) {
-          resolve(response);
-        } else {
-          reject(new Error('Cannot Add record'));
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        reject(error);
-      });
-  });
+// Add a review
+async function addReviewToMovie(movieId, review) {
+  return db.addReview(movieId, review);
+}
+// delete a review
+async function deleteReview(reviewId) {
+  return db.deleteReview(reviewId);
 }
 
-function deleteReview(reviewId) {
-  return new Promise((resolve, reject) => {
-    db.deleteReview(reviewId)
-      .then((response) => {
-        if (response) {
-          resolve(response);
-        } else {
-          reject(new Error('Cannot Add record'));
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        reject(error);
-      });
-  });
-}
 module.exports = {
-  postForm,
-  getAllRecords,
-  deleteRecord,
-  loadSelectedRecord,
-  updateRecord,
+  addMovie,
+  retrieveAllRecords,
+  deleteMovie,
+  getDetailsToEdit,
+  updateMovie,
   getMovieDetails,
-  addReview,
+  addReviewToMovie,
   deleteReview,
 };

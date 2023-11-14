@@ -14,34 +14,39 @@
 </head>
 
 <body>
-    <div>
+    <div class="mb-4 mb-4">
         <header>
-            <div class=" py-3 bg-primary">
-                <a href="/">
-                    <h1 class="col-xl-12 col-lg-12 col-md-12 col-sm-12 my-0 text-white">Movie Details Management System
-                    </h1>
-                </a>
+            <div class=" py-3 bg-primary d-flex justify-content-between">
+                <div> <a href="/">
+                        <h1 class="col-xl-12 col-lg-12 col-md-12 col-sm-12 my-0 text-white">Movie Details Management
+                            System
+                        </h1>
+                    </a></div>
+                <div class="mr-2">
+                    <a class="details nav m-0 mr-1" href="/">Home</a>
+                </div>
             </div>
         </header>
         <main>
             <div class="details container">
                 <div class="details bg-secondary text-white p-3 rounded">
+                    <% if (movieDetails!==null&& typeof movieDetails!=='undefined') { %>
 
 
                     <p><b>Title: </b></p><span><%= movieDetails.title %></span>
-                    <p><b>Release Date: </b></p><span> <%= movieDetails.release_date %></span>
+                    <p><b>Release Date: </b></p><span> <%= movieDetails.new_date %></span>
                     <p><b>Director: </b> </p><span><%= movieDetails.director %></span>
                     <p><b>Genre: </b> </p><span><%= movieDetails.genre %></span>
                     <p><b>Language: </b> </p><span><%= movieDetails.language %></span>
                     <p><b>Runtime: </b></p><span><%= movieDetails.runtime %></span>
                     <p><b>Description: </b></p><span><%= movieDetails.description %></span>
-                    <p><b>Number of Reviews:</b></p><span><%= reviews.review_count %></span>
+                    <p><b>Number of Reviews:</b></p><span><%= movieDetails.review_count %></span>
                 </div>
 
                 <div class="reviews">
                     <div>
                         <div class="add-review d-flex justify-content-between mb-5">
-                            <h5>Reviews</h5>
+                            <h4 class="text-primary">Reviews</h4>
                             <button class="py-1 px-2 rounded add-review-button bg-white text-success border-success"
                                 title="Add New Review">Add +</button>
                         </div>
@@ -52,12 +57,11 @@
                                 <button type="submit" class="btn review-submit-button">ADD</button>
                             </form>
                         </div>
-
-                        <% if (typeof reviews!==null ) { %>
+                        <hr>
+                        <% if (movieDetails.review_count>0) { %>
                         <div>
                             <% reviews.forEach((item) => { %>
 
-                            <% if (item.review_id!==null) { %>
 
                             <div class="review d-flex justify-content-between mb-3">
                                 <div>
@@ -70,18 +74,19 @@
                                             class=" trash-icon fa fa-trash" aria-hidden="true"></i></a>
                                 </div>
                             </div>
-                            <% } %>
+                            <hr>
                             <% }) %>
-
-                            <% } else { %>
-                            <div class="details bg-secondary text-white p-3 rounded text-center">
-                                <p class="m-0">NO RESULTS FOUND!!!</p>
-                                <% } %>
-                            </div>
+                            <% } %>
 
                         </div>
+
+
                     </div>
+                </div> <% } else { %>
+                <div class="details bg-secondary text-white p-0 m-0 w-100 rounded text-center">
+                    <p class="m-0">NO RESULTS FOUND!!!</p>
                 </div>
+                <% } %>
 
             </div>
         </main>
