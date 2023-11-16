@@ -58,7 +58,7 @@ td a {
   width: 30%;
   padding: 2px 5px;
   word-wrap: normal;
-  font-size: 10px;
+  font-size: 13px;
   display: inline-block;
   border-radius: 2px !important;
 }
@@ -69,6 +69,11 @@ span {
   display: inline-block;
   vertical-align: text-top !important;
   margin-bottom: 15px;
+}
+
+/* navigation link - jump to pages */
+.nav {
+  width: fit-content !important;
 }
 
 .details {
@@ -231,6 +236,7 @@ span {
     width: auto;
     font-size: 12px;
   }
+
   .nav {
     font-size: 10px;
   }
@@ -273,9 +279,11 @@ span {
   .review-submit-button {
     font-size: 12px;
   }
+
   .nav {
     font-size: 8px;
   }
+
   /* labels for the movie details */
   .details>p {
     width: 40%;

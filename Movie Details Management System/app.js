@@ -3,7 +3,6 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const Route = require('./routes/route');
 const con = require('./config/db');
-
 // port
 const port = process.env.PORT || 3000;
 
@@ -23,7 +22,6 @@ app.use(express.json());
 
 // route setup
 app.use(Route);
-
 // body parser
 app.use(express.urlencoded({
   extended: true,
@@ -41,9 +39,9 @@ app.use((req, res, next) => {
 });
 
 // Custom error handling for other errors
-app.use((req, res) => {
+app.use((error, req, res) => {
   res.status(500).render('error', {
-    error: 'An error occurred',
+    error,
   });
 });
 
