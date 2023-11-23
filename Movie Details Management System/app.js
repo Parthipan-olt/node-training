@@ -33,7 +33,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // page not found error
 app.use((req, res, next) => {
   res.status(404).render('error', {
-    error: 'Page Not Found',
+    error: {
+      message: 'Page Not Found'
+    },
   });
   next();
 });
@@ -41,7 +43,7 @@ app.use((req, res, next) => {
 // Custom error handling for other errors
 app.use((error, req, res) => {
   res.status(500).render('error', {
-    error,
+    error:{message:'An error Occured!'},
   });
 });
 

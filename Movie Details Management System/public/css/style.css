@@ -40,7 +40,7 @@ select {
 table {
   word-wrap: break-word !important;
   max-width: 100%;
-  white-space: nowrap;
+  white-space: balance;
 }
 
 td,
@@ -48,9 +48,7 @@ th {
   padding: 5px !important;
   width: 200px !important;
   max-width: 200px !important;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+
 }
 
 /* View, Edit, Delete Buttons - List page */

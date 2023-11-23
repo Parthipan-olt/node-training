@@ -7,7 +7,7 @@ const {
 const {
   Review,
 } = require('../../models/review-model');
-
+const Joi = require('joi');
 // Your application logic using Movie, Review, and sequelize
 
 Review.belongsTo(Movie, {
@@ -21,16 +21,16 @@ Movie.hasMany(Review, {
 async function retrieveAllRecords() {
   return new Promise((resolve, reject) => {
     Movie.findAll({
-      attributes: [
-        'movie_id', 'title', 'release_date', 'director', 'language', 'description', 'genre', 'runtime',
-        [sequelize.literal('(SELECT COUNT(movie_id) FROM movie_reviews WHERE movie_reviews.movie_id = Movie.movie_id)'), 'review_count'],
-      ],
-      include: [{
-        model: Review,
-        where: Movie.movie_id = Review.movie_id,
-        group: ['movie_details.movie_id'],
-      }],
-    })
+        attributes: [
+          'movie_id', 'title', 'release_date', 'director', 'language', 'description', 'genre', 'runtime',
+          [sequelize.literal('(SELECT COUNT(movie_id) FROM movie_reviews WHERE movie_reviews.movie_id = Movie.movie_id)'), 'review_count'],
+        ],
+        include: [{
+          model: Review,
+          where: Movie.movie_id = Review.movie_id,
+          group: ['movie_details.movie_id'],
+        }],
+      })
       .then((response) => {
         resolve(response);
       })
@@ -43,14 +43,14 @@ async function retrieveAllRecords() {
 async function addMovie(input) {
   return new Promise((resolve, reject) => {
     Movie.create({
-      title: input.title,
-      description: input.description,
-      director: input.director,
-      release_date: input.releaseDate,
-      language: input.language,
-      genre: input.genre,
-      runtime: input.runtime,
-    })
+        title: input.title,
+        description: input.description,
+        director: input.director,
+        release_date: input.releaseDate,
+        language: input.language,
+        genre: input.genre,
+        runtime: input.runtime,
+      })
       .then((response) => {
         resolve(response);
       })
@@ -64,12 +64,12 @@ async function addMovie(input) {
 async function deleteMovie(movieId) {
   return new Promise((resolve, reject) => {
     Movie.destroy({
-      where: {
-        movie_id: movieId,
-      },
-    }).then((response) => {
-      resolve(response);
-    })
+        where: {
+          movie_id: movieId,
+        },
+      }).then((response) => {
+        resolve(response);
+      })
       .catch((error) => {
         reject(error);
       });
@@ -93,18 +93,18 @@ async function getDetailsToEdit(movieId) {
 async function updateMovie(input, movieId) {
   return new Promise((resolve, reject) => {
     Movie.update({
-      title: input.title,
-      description: input.description,
-      director: input.director,
-      release_date: input.releaseDate,
-      language: input.language,
-      genre: input.genre,
-      runtime: input.runtime,
-    }, {
-      where: {
-        movie_id: movieId,
-      },
-    })
+        title: input.title,
+        description: input.description,
+        director: input.director,
+        release_date: input.releaseDate,
+        language: input.language,
+        genre: input.genre,
+        runtime: input.runtime,
+      }, {
+        where: {
+          movie_id: movieId,
+        },
+      })
       .then((response) => {
         resolve(response);
       })
@@ -118,23 +118,23 @@ async function updateMovie(input, movieId) {
 async function getMovieDetails(movieId) {
   return new Promise((resolve, reject) => {
     Movie.findOne({
-      attributes: [
-        'movie_id', 'title', 'release_date', 'director', 'language', 'description', 'genre', 'runtime',
-        [sequelize.literal('(SELECT COUNT(movie_id) FROM movie_reviews WHERE movie_reviews.movie_id = Movie.movie_id)'), 'review_count'],
-      ],
-      where: {
-        movie_id: movieId,
-      },
-      include: [{
-        model: Review,
-        where: Movie.movie_id = Review.movie_id,
-
-      }],
-    })
+        attributes: [
+          'movie_id', 'title', 'release_date', 'director', 'language', 'description', 'genre', 'runtime',
+          [sequelize.literal('(SELECT COUNT(movie_id) FROM movie_reviews WHERE movie_reviews.movie_id = Movie.movie_id)'), 'review_count'],
+        ],
+        where: {
+          movie_id: movieId,
+        },
+        include: [{
+          model: Review,
+          where: Movie.movie_id = Review.movie_id,
+        }],
+      })
       .then((response) => {
         resolve(response);
       })
       .catch((error) => {
+
         reject(error);
       });
   });
@@ -144,9 +144,9 @@ async function getMovieDetails(movieId) {
 async function addReviewToMovie(movieId, reviews) {
   return new Promise((resolve, reject) => {
     Review.create({
-      review: reviews,
-      movie_id: movieId,
-    })
+        review: reviews,
+        movie_id: movieId,
+      })
       .then((response) => {
         resolve(response);
       })
@@ -158,10 +158,10 @@ async function addReviewToMovie(movieId, reviews) {
 async function deleteReview(reviewId) {
   return new Promise((resolve, reject) => {
     Review.destroy({
-      where: {
-        review_id: reviewId,
-      },
-    })
+        where: {
+          review_id: reviewId,
+        },
+      })
       .then((response) => {
         resolve(response);
       })
@@ -169,6 +169,30 @@ async function deleteReview(reviewId) {
         reject(error);
       });
   });
+}
+
+function validateForm(body) {
+  const schema = Joi.object({
+    title: Joi.string().required(),
+    description: Joi.string().required(),
+    director: Joi.string().required(),
+    releaseDate: Joi.string().required(),
+    language: Joi.string().required(),
+    genre: Joi.string().required(),
+    runtime: Joi.string().required(),
+  }).options({
+    allowUnknown: true,
+  });
+
+  const {
+    error
+  } = schema.validate(body);
+
+  if (error) {
+    throw new Error(error.details.map((i) => i.message).join(', '));
+  } else {
+    return true;
+  }
 }
 
 // export modules
@@ -182,5 +206,5 @@ module.exports = {
   addReviewToMovie,
   deleteReview,
   sequelize,
-
+  validateForm
 };

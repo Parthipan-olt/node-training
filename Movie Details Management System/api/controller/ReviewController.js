@@ -1,15 +1,28 @@
 const services = require('../services/services');
+const Joi = require('joi');
+
 
 const addReview = async (req, res) => {
   try {
     const {
       movieId,
-    } = req.query;
+    } = req.params;
+
+    const schema = Joi.object({
+      review: Joi.string().required(),
+    });
+    const {
+      error
+    } = schema.validate(req.body);
+    if (error) {
+      throw new Error('kjn')
+    }
     const {
       review,
     } = req.body;
+
     await services.addReviewToMovie(movieId, review);
-    res.redirect(`/details?movieId=${movieId}`);
+    res.redirect(`/${movieId}/details`);
   } catch (error) {
     res.render('error', {
       error,
@@ -22,9 +35,11 @@ const deleteReview = async (req, res) => {
     const {
       movieId,
       reviewId,
-    } = req.query;
+    } = req.params;
+
+    console.log(movieId, reviewId)
     await services.deleteReview(reviewId);
-    res.redirect(`/details?movieId=${movieId}`);
+    res.redirect(`/${movieId}/details`);
   } catch (error) {
     res.render('error', {
       error,

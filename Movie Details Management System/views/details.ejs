@@ -10,38 +10,97 @@
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/javascripts/script.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
+    <script>
+        $(document).ready(function () {
+            $('.delete-review').on('click', function () {
+                const reviewId = $(this).data('review-id');
+                const movieId = $(this).data('movie-id');
+                console.log(movieId);
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'You won\'t be able to revert this!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'No, cancel!',
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = `/${reviewId}/${movieId}/delete-review`;
+                    } else {
+                        Swal.fire('Cancelled', 'Your file is safe :)', 'info');
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 
 <body>
     <div class="mb-4 mb-4">
         <header>
             <div class=" py-3 bg-primary ">
-              <div> <a href="/">
-                  <h1 class="col-xl-12 col-lg-12 col-md-12 col-sm-12 my-0 text-white">Movie Details Management
-                    System
-                  </h1>
-                </a></div>
+                <div> <a href="/">
+                        <h1 class="col-xl-12 col-lg-12 col-md-12 col-sm-12 my-0 text-white">Movie Details Management
+                            System
+                        </h1>
+                    </a></div>
             </div>
-            
-            <div class="d-flex justify-content-end w-100 text-right mt-2" >
-              <a class="details bg-primary p-1 rounded nav m-0 mr-3 d-inline-block" href="/">Home</a>
+
+            <div class="d-flex justify-content-end w-100 text-right mt-2">
+                <a class="details bg-primary p-1 rounded nav m-0 mr-3 d-inline-block" href="/">Home</a>
             </div>
-          </header>
+        </header>
         <main>
-            <div class="details container">
-                <div class="details bg-secondary text-white p-3 rounded">
-                   
+            <div class="details">
+                <div class="details  p-3 rounded d-flex align-items-center">
+
                     <% if (movieDetails!==null&& typeof movieDetails!=='undefined') { %>
 
-                    <p><b>Title: </b></p><span><%= movieDetails.title %></span>
-                    <p><b>Release Date: </b></p><span> <%= movieDetails.release_date %></span>
-                    <p><b>Director: </b> </p><span><%= movieDetails.director %></span>
-                    <p><b>Genre: </b> </p><span><%= movieDetails.genre %></span>
-                    <p><b>Language: </b> </p><span><%= movieDetails.language %></span>
-                    <p><b>Runtime: </b></p><span><%= movieDetails.runtime %> mins</span>
-                    <p><b>Description: </b></p><span><%= movieDetails.description %></span>
-                    <p><b>Number of Reviews:</b></p><span><%= movieDetails.review_count %></span>
+                    <table style="width: 100%;">
+                        <tr>
+
+                            <th colspan="2" style="width: 100%;font-size: 150%;"><%= movieDetails.title %></td>
+                        </tr>
+                        <tr>
+                            <td>Release Date:</td>
+                            <td> <%= movieDetails.release_date %></td>
+                        </tr>
+                        <tr>
+                            <td>Director:</td>
+                            <td><%= movieDetails.director %></td>
+                        </tr>
+                        <tr>
+                            <td>Genre:</td>
+                            <td><%= movieDetails.genre %></td>
+                        </tr>
+                        <tr>
+                            <td>Language:</td>
+                            <td><%= movieDetails.language %></td>
+                        </tr>
+                        <tr>
+                            <td>Runtime: </td>
+                            <td><%= movieDetails.runtime %> mins</td>
+                        </tr>
+
+                        <tr>
+                            <td>Number of Reviews:</td>
+                            <td><%= movieDetails.review_count %></td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2">Description: </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><%= movieDetails.description %>
+                            </td>
+                        </tr>
+                    </table>
+
+
                 </div>
 
                 <div class="reviews">
@@ -51,7 +110,8 @@
                         </div>
 
                         <div class="review-input-div d-block mb-5">
-                            <form action="/add-review?movieId=<%= movieDetails.movie_id%>" method="post">
+                            <form action="/<%= movieDetails.movie_id%>/add-review" method="post"
+                                id="addReviewForm">
                                 <input type="text" class="review-input" maxlength="200" name="review">
                                 <button type="submit" class="btn review-submit-button">ADD</button>
                             </form>
@@ -67,9 +127,11 @@
                                     </p>
                                 </div>
                                 <div>
-                                    <a href="/delete-review?reviewId=<%= item.review_id %>&movieId=<%=movieDetails.movie_id  %>"
-                                        class="bg-white p-1 px-2 ml-2 rounded" title="Delete Review"><i
-                                            class=" trash-icon fa fa-trash" aria-hidden="true"></i></a>
+                                    <a class="bg-white p-1 px-2 ml-2 rounded delete-review" title="Delete Review"
+                                        data-review-id="<%= item.review_id %>"
+                                        data-movie-id="<%= movieDetails.movie_id%>">
+
+                                        <i class=" trash-icon fa fa-trash " aria-hidden="true"></i></a>
                                 </div>
                             </div>
                             <hr>
@@ -85,6 +147,9 @@
             </div>
         </main>
     </div>
+
+
+
 </body>
 
 </html>

@@ -1,7 +1,12 @@
 const services = require('../services/services');
 
+const {
+  validationResult
+} = require('express-validator');
+
 const loadIndexPage = async (req, res) => {
   try {
+    validationResult(req).throw();
     const records = await services.retrieveAllRecords();
     if (!records || typeof records === 'undefined') {
       throw new Error('No Records!!!');
@@ -11,10 +16,11 @@ const loadIndexPage = async (req, res) => {
     });
   } catch (error) {
     res.render('error', {
-      error,
+      error: error.message || 'An error occurred',
     });
   }
 };
+
 
 const loadAddMoviePage = async (req, res) => {
   try {
@@ -31,6 +37,8 @@ const addMovie = async (req, res) => {
     if (!req.body) {
       throw new Error('Input Undefined!!!')
     }
+   const body=req.body;
+    services.validateForm(body);
     await services.addMovie(req.body);
     res.redirect('/');
   } catch (error) {
@@ -44,7 +52,7 @@ const deleteMovie = async (req, res) => {
   try {
     const {
       movieId,
-    } = req.query;
+    } = req.params;
     if (!movieId) {
       throw new Error('Movie Does Not Exist!!');
     }
@@ -108,9 +116,10 @@ const getMovieDetails = async (req, res) => {
       reviews: resp.Reviews,
     });
   } catch (error) {
-    res.render('error', {
-      error,
-    });
+    error = {
+      message: 'Movie Not Found!'
+    }
+    res.render('error', error);
   }
 };
 
