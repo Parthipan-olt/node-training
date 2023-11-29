@@ -20,7 +20,7 @@ router.get('/:movieID/edit', MovieController.loadEditMoviePage);
 router.post('/:movieID/update', MovieController.update);
 
 // // add review
-router.post('/:movieID/add-review', MovieController.addNewReview);
+router.post('/:movieID/add-review', MovieController.addReview);
 
 // // view details
 router.get('/:movieID/details', MovieController.viewDetails);

@@ -179,7 +179,7 @@ const viewDetails = async (req, res) => {
     }
 }
 
-const addNewReview = async (req, res) => {
+const addReview = async (req, res) => {
     try {
         const movieID = req.params.movieID ? req.params.movieID : '';
         const reviewInput = req.body ? req.body : '';
@@ -229,7 +229,7 @@ const deleteReview = async (req, res) => {
 }
 
 module.exports = {
-    addNewReview,
+    addReview,
     deleteReview,
     loadIndexPage,
     loadAddMoviePage,
