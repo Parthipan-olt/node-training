@@ -20,23 +20,20 @@
     <script>
         $(document).ready(function () {
             $('.delete-review').on('click', async function () {
-                const movieId = $(this).data('movie-id');
+                const movieID = $(this).data('movie-id');
                 const reviewId=$(this).data('review-id');
                 Swal.fire({
                     title: 'Are you sure?',
                     text: 'You won\'t be able to revert this!',
-                    icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonText: 'Yes, delete it!',
-                    cancelButtonText: 'No, cancel!',
+                    confirmButtonText: 'Yes',
+                    cancelButtonText: 'No',
                     confirmButtonColor: '#d33',
                     cancelButtonColor: '#3085d6',
                 }).then(async (result) => {
                     if (result.isConfirmed) {
-                        window.location.href = `/${reviewId}/${movieId}/delete-review`;
-                    } else {
-                        Swal.fire('Cancelled', 'Your file is safe :)', 'info');
-                    }
+                        window.location.href = `/${movieID}/${reviewId}/delete-review`;
+                    } 
                 });
             });
 
@@ -67,10 +64,10 @@
         </header>
 
         <main>
-            <div class="main-container w-75 m-auto p-5 rounded border mt-5">
+            <div class="main-container w-75 m-auto p-5 rounded border mt-5 ">
                 <% if (movieDetails!==null&& typeof movieDetails!=='undefined') { %>
 
-                <div class="header-section d-flex justify-content-between border-bottom mb-5 pb-3">
+                <div class="header-section d-flex justify-content-between border-bottom mb-5 pb-3 details-bg">
                     <div class="title-container">
                         <h4><%= movieDetails.title %></h4>
                     </div>
@@ -79,7 +76,7 @@
                     </div>
                 </div>
 
-                <div class="table-container border-top ">
+                <div class="table-container border-top details-bg">
                     <table style="width: 100%;">
                         <tr>
                             <td class="bold-font">Release Date:</td>
@@ -106,7 +103,7 @@
                             <td><%= movieDetails.review_count || movieDetails.dataValues.review_count %></td>
                         </tr>
                     </table>
-                    <table class="mt-4 w-100">
+                    <table class="mt-4 w-100 details-bg">
                         <tr class="border-bottom">
                             <td class="bold-font">Description: </td>
                         </tr>
@@ -119,12 +116,12 @@
                 <div class="review-container mt-5">
 
                     <div class="add-review d-flex justify-content-between mb-5">
-                        <h4 class="text-primary">Reviews</h4>
+                        <h4>Reviews</h4>
                     </div>
 
                     <div class="review-input-div d-block mb-5">
                         <form action="/<%= movieDetails.movie_id%>/add-review" id="addReviewForm">
-                            <input type="text" class="review-input" maxlength="200" name="review">
+                            <input type="text" class="review-input" maxlength="200" name="review" required>
                             <button type="submit" class="btn review-submit-button">ADD</button>
                         </form>
                     </div>
@@ -147,9 +144,7 @@
                 <% } %>
             </div>
             <% } else { %>
-            <div class="details  text-center">
                 <p class="m-0">NO RESULTS FOUND!!!</p>
-            </div>
             <% } %>
         </main>
     </div>

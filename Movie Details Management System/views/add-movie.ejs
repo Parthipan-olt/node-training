@@ -38,53 +38,52 @@
 
 
     <main>
-     <div class="main-container w-75 m-auto p-5 rounded border mt-5">
-          <div class="d-flex justify-content-end">
-            <a href="/" class="btn btn-primary "> Home</a>
+      <div class="main-container w-75 m-auto p-5 rounded border mt-5">
+        <div class="d-flex justify-content-end">
+          <a href="/" class="btn btn-primary "> Home</a>
+        </div>
+        <form id="addNewMovie" action="/add-movie" name="movieForm">
+
+          <div class="col-xl-12 ">
+            <h3 class="mb-5">Add a movie</h3>
+
+            <label for="movieTitle">Title</label>
+            <input type="text" id="title" name="title" maxlength="100" required>
+
+            <label for="movieDescription">Description</label>
+            <textarea name="description" id="movieDescription" cols="30" rows="5" maxlength="100" required></textarea>
+            <label for="director">Director</label>
+            <input type="text" id="director" name="director" maxlength="100" required>
+
+            <label for="releaseYear">Release Date/Year</label>
+            <input type="date" id="releaseYear" name="releaseDate" min="1895-10-28" required>
+
+
+            <label for="language">Language</label>
+            <input type="text" id="language" maxlength="20" name="language" required>
+
+            <label for="genres">Genre</label>
+            <select name="genre" id="genres" required>
+              <option value="" disabled selected>Choose an Option</option>
+              <option value="Action">Action</option>
+              <option value="Drama">Drama</option>
+              <option value="Romance">Romance</option>
+              <option value="Horror">Horror</option>
+              <option value="Crime">Crime</option>
+            </select>
+
+            <label for="runtime">Runtime(mins)</label>
+            <input type="number" id="runtime" min="0" max="99999" name="runtime" required>
+
+            <div class="d-flex justify-content-end">
+              <a href="/" class="btn btn-white border">Cancel</a>
+              <button class="btn btn-danger text-white reset mx-2" type="reset">
+                Reset
+              </button>
+              <button class="btn btn-primary" type="submit">Submit</button></div>
           </div>
-          <form id="addNewMovie" action="/add-movie" name="movieForm">
 
-            <div class="col-xl-12 ">
-              <h3 class="mb-5">Add a movie</h3>
-
-              <label for="movieTitle">Title</label>
-              <input type="text" id="title" name="title" maxlength="100">
-
-              <label for="movieDescription">Description</label>
-              <input type="text" id="movieDescription" name="description" maxlength="100">
-
-              <label for="director">Director</label>
-              <input type="text" id="director" name="director" maxlength="100">
-
-              <label for="releaseYear">Release Date/Year</label>
-              <input type="date" id="releaseYear" name="releaseDate" min="1895-10-28">
-
-
-              <label for="language">Language</label>
-              <input type="text" id="language" maxlength="20" name="language">
-
-              <label for="genres">Genre</label>
-              <select name="genre" id="genres">
-                <option value="" disabled selected>Choose an Option</option>
-                <option value="Action">Action</option>
-                <option value="Drama">Drama</option>
-                <option value="Romance">Romance</option>
-                <option value="Horror">Horror</option>
-                <option value="Crime">Crime</option>
-              </select>
-
-              <label for="runtime">Runtime(mins)</label>
-              <input type="number" id="runtime" min="0" max="99999" name="runtime">
-
-              <div class="d-flex justify-content-end">
-                <a href="/" class="btn btn-white border">Cancel</a>
-                <button class="btn btn-danger text-white reset mx-2" type="reset">
-                  Reset
-                </button>
-                <button class="btn btn-primary" type="submit">Submit</button></div>
-            </div>
-
-          </form>
+        </form>
       </div>
     </main>
   </div>

@@ -30,26 +30,28 @@ app.use(express.urlencoded({
 // setup public folder
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+app.use((error, req, res, next) => {
+  if (error) {
+    res.status(500).render('error', {
+      error: {
+        message: 'Internal Server Error'
+      },
+    });
+  }
+  next();
+});
 // page not found error
-app.use(( req, res, next) => {
+app.use((req, res, next) => {
   res.status(404).render('error', {
     error: {
       message: 'Page Not Found'
     },
   });
-  next();
 });
 
 // Custom error handling for other errors
-app.use((error, req, res, next) => {
 
-  res.status(500).render('error', {
-    error: {
-      message: 'Internal Server Error'
-    },
-  });
-  next();
-});
 
 // listen to port
 const server = app.listen(port, (error) => {

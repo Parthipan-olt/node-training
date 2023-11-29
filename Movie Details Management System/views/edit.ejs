@@ -48,29 +48,29 @@
         <div class="row">
 
 
-          <form action="/<%= movieId %>/update" id="editMovie">
+          <form action="/<%= movieID %>/update" id="editMovie">
             <div class="col-xl-12 justify-content-between">
               <h3 class="mb-5">Edit Details</h3>
 
               <label for="movieTitle">Title</label>
-              <input type="text" id="movieTitle" value="<%= record.title %>" name="title" >
+              <input type="text" id="movieTitle" value="<%= record.title %>" name="title" required>
 
               <label for="movieDescription">Description</label>
-              <input type="text" id="movieDescription" maxlength="20" value="<%= record.description %>"
-                name="description" >
+              <textarea name="description" id="movieDescription" cols="30" rows="5" maxlength="100"
+                required><%= record.description %></textarea>
 
               <label for="director">Director</label>
-              <input type="text" id="director" value="<%= record.director %>" name="director" >
+              <input type="text" id="director" value="<%= record.director %>" name="director" required>
 
               <label for="releaseYear">Release Date/Year</label>
-              <input type="date" id="releaseYear" name="releaseDate" value="<%= record.release_date %>" 
+              <input type="date" id="releaseYear" name="releaseDate" value="<%= record.release_date %>"
                 min="1895-10-28">
 
               <label for="language">Language</label>
-              <input type="text" id="language" maxlength="10" value="<%= record.language %>" name="language" >
+              <input type="text" id="language" maxlength="10" value="<%= record.language %>" name="language" required>
               <% let genre = record.genre %>
               <label for="genres">Genre</label>
-              <select name="genre" id="genres" >
+              <select name="genre" id="genres">
                 <option value="" disabled <% if (!genre) { %>selected<% } %>>Choose an Option</option>
                 <option value="Action" <% if (genre === 'Action') { %>selected<% } %>>Action</option>
                 <option value="Drama" <% if (genre === 'Drama') { %>selected<% } %>>Drama</option>
@@ -81,7 +81,7 @@
 
               <label for="runtime">Runtime(mins)</label>
               <input type="number" id="runtime" min="0" max="99999" value="<%= record.runtime %>" name="runtime"
-                >
+                required>
 
               <div class="d-flex justify-content-end">
                 <a href="/" class="btn btn-white border">Cancel</a>
@@ -94,11 +94,8 @@
         </div>
       </div>
 
-      <% } else{%>
-      <div class="text-center d-inline">
-        <h4 class="text-danger">No Records!!!</h4>
-      </div>
-      <% } %>
+      <% }%>
+     
     </main>
   </div>
 </body>

@@ -9,25 +9,25 @@ router.get('/', MovieController.loadIndexPage);
 // // Add movie view
 router.get('/add-movie', MovieController.loadAddMoviePage);
 
-router.post('/add-movie', MovieController.addNewMovie);
+router.post('/add-movie', MovieController.addMovie);
 
 // // delete record
-router.get('/:movieid/delete-movie', MovieController.deleteMovie);
+router.get('/:movieID/delete-movie', MovieController.deleteMovie);
 
 // // populate form
-router.get('/:movieid/edit', MovieController.loadEditMoviePage);
+router.get('/:movieID/edit', MovieController.loadEditMoviePage);
 
 // // submit edited details
-router.post('/:movieid/update', MovieController.submitEditedData);
+router.post('/:movieID/update', MovieController.update);
 
 // // add review
-router.post('/:movieid/add-review', ReviewController.addNewReview);
+router.post('/:movieID/add-review', ReviewController.addNewReview);
 
 // // view details
-router.get('/:movieid/details', MovieController.viewDetails);
+router.get('/:movieID/details', MovieController.viewDetails);
 
 // // delete review
-router.get('/:reviewId/:movieId/delete-review', ReviewController.deleteReview);
+router.get('/:movieID/:reviewId/delete-review', ReviewController.deleteReview);
 
 
 module.exports = router;

@@ -9,8 +9,28 @@ a:hover {
   text-decoration: none;
   color: inherit;
 }
+textarea{
+  display: block;
+  resize: none;
+  width: 100%;
+}
 
-/* ===============INDEX PAGE=============== */
+/* Disable spin buttons of number feild */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input,
+select {
+  width: 100%;
+  margin-bottom: 15px;
+  display: inline-block;
+  padding: 5px
+}
+
+
 .index table {
   table-layout: fixed;
   text-overflow: ellipsis;
@@ -59,6 +79,7 @@ a:hover {
 .bold-font {
   color: #000 !important;
   width: 25%;
+  font-weight: bold;
 }
 
 .review-container {
@@ -81,22 +102,6 @@ a:hover {
   border-radius: 2px !important;
 }
 
-/* Disable spin buttons of number feild */
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-input,
-select {
-  width: 100%;
-  margin-bottom: 15px;
-  display: inline-block;
-  padding: 5px
-}
-
-
 /* delete review  button icon */
 .trash-icon {
   font-size: 12px;
@@ -115,169 +120,3 @@ select {
 }
 
 
-/* media queries */
-@media (max-width :1280px) {
-  h1 {
-    font-size: 32px;
-  }
-
-  table {
-    font-size: 16px;
-  }
-
-  table a {
-    font-size: 10px;
-  }
-
-  /* Reviews heading */
-  h3,
-  h4 {
-    font-size: 15px
-  }
-
-  .details,
-  .review-submit-button {
-    width: auto;
-    font-size: 16px;
-  }
-
-  .nav {
-    font-size: 13px;
-  }
-
-  .modal,
-  .modal button,
-  .modal h4,
-  .modal a {
-    font-size: 16px;
-    left: auto !important;
-  }
-}
-
-@media (max-width :768px) {
-  h1 {
-    font-size: 30px;
-  }
-
-  table {
-    font-size: 13px;
-  }
-
-  select {
-    font-size: 13px;
-  }
-
-  table a {
-    width: 100%;
-    display: block;
-    margin-bottom: 5px;
-    font-size: 12px;
-  }
-
-  .details,
-  .review-submit-button {
-    width: auto;
-    font-size: 13px;
-  }
-
-  .nav {
-    font-size: 12px;
-  }
-
-  /* Delete confirmation modal - list page */
-  .modal {
-    position: absolute;
-  }
-
-  .modal,
-  .modal button,
-  .modal h4,
-  .modal a {
-    font-size: 10px;
-    left: auto !important;
-  }
-
-  .modal-header,
-  .modal-body,
-  .modal-footer {
-    padding: 5px !important;
-  }
-}
-
-@media (max-width :450px) {
-  h1 {
-    font-size: 18px;
-  }
-
-  form button,
-  table,
-  table a,
-  input,
-  label {
-    font-size: 10px !important;
-  }
-
-  h3,
-  h4 {
-    font-size: 15px
-  }
-
-  .details,
-  .review-submit-button {
-    width: auto;
-    font-size: 12px;
-  }
-
-  .nav {
-    font-size: 10px;
-  }
-}
-
-@media (max-width :370px) {
-  h1 {
-    font-size: 15px;
-  }
-
-  h3,
-  h4 {
-    font-size: 12px
-  }
-
-  input,
-  label {
-    font-size: 9px;
-    width: 100%;
-  }
-
-  form button {
-    font-size: 9px !important;
-  }
-
-  /* span - reviews- details page */
-  span {
-    width: 60%;
-  }
-
-  table {
-    font-size: 8px;
-  }
-
-  td a {
-    font-size: 8px;
-  }
-
-  .details,
-  .review-submit-button {
-    font-size: 12px;
-  }
-
-  .nav {
-    font-size: 8px;
-  }
-
-  /* labels for the movie details */
-  .details>p {
-    width: 40%;
-  }
-
-}

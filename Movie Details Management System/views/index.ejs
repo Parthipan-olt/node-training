@@ -20,21 +20,19 @@
   <script>
     $(document).ready(function () {
       $('.delete-button').on('click', function () {
-        const movieId = $(this).data('movieid');
+        const movieID = $(this).data('movieid');
+        console.log(movieID)
         Swal.fire({
           title: 'Are you sure?',
           text: 'You won\'t be able to revert this!',
-          icon: 'warning',
           showCancelButton: true,
-          confirmButtonText: 'Yes, delete it!',
-          cancelButtonText: 'No, cancel!',
+          confirmButtonText: 'Yes',
+          cancelButtonText: 'No',
           confirmButtonColor: '#d33',
           cancelButtonColor: '#3085d6',
         }).then(async (result) => {
           if (result.isConfirmed) {
-            window.location.href = `/${movieId}/delete-movie`;
-          } else {
-            Swal.fire('Cancelled', 'Your file is safe :)', 'info');
+            window.location.href = `/${movieID}/delete-movie`;
           }
         });
       });
@@ -110,7 +108,7 @@
                 <td><%= element.release_date %></td>
                 <td><%= element.dataValues.review_count %></td>
                 <td class="text-center">
-                  <a href="/<%= element.movie_id %>/details" class=" btn-primary py-0" title="Details"><i
+                  <a href="/<%= element.movie_id %>/details" class=" btn-primary py-0" title="View" ><i
                       class="fa fa-eye" aria-hidden="true"></i></a>
                   <a href="/<%= element.movie_id %>/edit" class="btn-success py-0 edit-button" title="Edit"><i
                       class="fa fa-pencil" aria-hidden="true"></i></a>

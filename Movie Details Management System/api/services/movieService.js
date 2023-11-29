@@ -3,7 +3,7 @@ const {
 } = require('../../config/db');
 const {
     Movie,
-} = require('../../models/movie-model');
+} = require('../../models/movie_details');
 const {
     Review,
 } = require('../../models/review-model');
@@ -15,6 +15,7 @@ Movie.hasMany(Review, {
     foreignKey: 'movie_id',
 });
 
+//Get all Records
 async function retrieveAllRecords() {
     return new Promise((resolve, reject) => {
         Movie.findAll({
@@ -27,6 +28,9 @@ async function retrieveAllRecords() {
                     where: Movie.movie_id = Review.movie_id,
                     group: ['movie_details.movie_id'],
                 }],
+                order: [
+                    ['release_date', 'DESC']
+                ],
             })
             .then((response) => {
                 resolve(response);
@@ -37,6 +41,7 @@ async function retrieveAllRecords() {
     });
 }
 
+// Add Movie
 async function addMovie(input) {
     return new Promise((resolve, reject) => {
         Movie.create({
@@ -58,11 +63,12 @@ async function addMovie(input) {
     });
 }
 
-async function deleteMovie(movieId) {
+// Delete Movie
+async function deleteMovie(movieID) {
     return new Promise((resolve, reject) => {
         Movie.destroy({
                 where: {
-                    movie_id: movieId,
+                    movie_id: movieID,
                 },
             }).then((response) => {
                 resolve(response);
@@ -73,9 +79,11 @@ async function deleteMovie(movieId) {
     });
 }
 
-async function getDetailsToEdit(movieId) {
+
+// Get movie details by movie Id - primary key
+async function getDetailsToEdit(movieID) {
     return new Promise((resolve, reject) => {
-        Movie.findByPk(movieId)
+        Movie.findByPk(movieID)
             .then((response) => {
                 resolve(response);
             })
@@ -85,7 +93,8 @@ async function getDetailsToEdit(movieId) {
     });
 }
 
-async function updateMovie(movieId, input) {
+// Update movie
+async function updateMovie(movieID, input) {
     return new Promise(async (resolve, reject) => {
         Movie.update({
                 title: input.title,
@@ -97,11 +106,11 @@ async function updateMovie(movieId, input) {
                 runtime: input.runtime,
             }, {
                 where: {
-                    movie_id: movieId,
+                    movie_id: movieID,
                 },
             })
             .then((response) => {
-            
+
                 resolve(response);
             })
             .catch((error) => {
@@ -110,7 +119,8 @@ async function updateMovie(movieId, input) {
     });
 }
 
-async function getMovieDetails(movieId) {
+// Get movie Details - review count included
+async function getMovieDetails(movieID) {
     return new Promise((resolve, reject) => {
         Movie.findOne({
                 attributes: [
@@ -118,7 +128,7 @@ async function getMovieDetails(movieId) {
                     [sequelize.literal('(SELECT COUNT(movie_id) FROM movie_reviews WHERE movie_reviews.movie_id = Movie.movie_id)'), 'review_count'],
                 ],
                 where: {
-                    movie_id: movieId,
+                    movie_id: movieID,
                 },
             })
             .then((response) => {
@@ -131,6 +141,53 @@ async function getMovieDetails(movieId) {
     });
 }
 
+async function addReviewToMovie(movieID, reviews) {
+    console.log(reviews)
+    return new Promise((resolve, reject) => {
+        Review.create({
+                review: reviews,
+                movie_id: movieID,
+            })
+            .then((response) => {
+                resolve(response);
+            })
+            .catch((error) => {
+                reject(error);
+            });
+    });
+}
+async function deleteReview(reviewId) {
+    return new Promise((resolve, reject) => {
+        Review.destroy({
+                where: {
+                    review_id: reviewId,
+                },
+            })
+            .then((response) => {
+                resolve(response);
+            })
+            .catch((error) => {
+                reject(error);
+            });
+    });
+}
+async function getReviews(movieID) {
+    return new Promise((resolve, reject) => {
+
+        Review.findAll({
+                where: {
+                    movie_id: movieID,
+                },
+            }).then((response) => {
+
+                resolve(response);
+            })
+            .catch((error) => {
+
+                reject(error);
+            });
+    });
+}
 module.exports = {
     retrieveAllRecords,
     addMovie,
@@ -138,4 +195,7 @@ module.exports = {
     getDetailsToEdit,
     updateMovie,
     getMovieDetails,
+    addReviewToMovie,
+    deleteReview,
+    getReviews
 }
