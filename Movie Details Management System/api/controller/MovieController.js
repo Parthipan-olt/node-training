@@ -1,132 +1,241 @@
-const services = require('../services/services');
+const Joi = require('../services/formValidation');
+const service = require('../services/service')
 
-const {
-  validationResult
-} = require('express-validator');
 
+// Load Index Page (listing)
 const loadIndexPage = async (req, res) => {
-  try {
-    validationResult(req).throw();
-    const records = await services.retrieveAllRecords();
-    if (!records || typeof records === 'undefined') {
-      throw new Error('No Records!!!');
+    try {
+        const records = await service.retrieveAllRecords();
+
+        if (typeof records === 'undefined') {
+            throw new Error;
+        }
+
+        // Render index page if returned obj is not undefined
+        res.render('index', {
+            records
+        });
+    } catch (error) {
+        return res.render('error', {
+            error: {
+                message: error
+            }
+        })
     }
-    res.render('index', {
-      records,
-    });
-  } catch (error) {
-    res.render('error', {
-      error: error.message || 'An error occurred',
-    });
-  }
-};
+}
 
 
+// Load Add New Movie Page (Form)
 const loadAddMoviePage = async (req, res) => {
-  try {
-    res.render('add-movie');
-  } catch (error) {
-    res.render('error', {
-      error,
-    });
-  }
+    try {
+        // Render the ejs template
+        await res.render('add-movie');
+    } catch (error) {
+        throw new Error;
+    }
+}
+
+// Add new movie
+const addMovie = async (req, res) => {
+    try {
+        // Form Data
+        const movieData = req.body ? req.body : '';
+
+
+        // throw an error if the URL parameter movieID is undefined or null
+        if (typeof movieData === 'undefined') {
+            throw new Error(error)
+        }
+
+        // Validate form data
+        const validation = await Joi.validateForm(movieData);
+
+        if (validation.error) {
+            // If validation fails, return an error response to the client
+            const errorMessages = validation.error.details.map(detail => detail.message);
+
+            return res.status(400).json({
+                error: 'Validation Error',
+                details: errorMessages,
+            });
+        }
+
+        // If validation is successful, add the movie
+        else {
+            await service.addMovie(movieData);
+
+            // If success, redirect to home page
+            return res.json({
+                redirectTo: '/'
+            });
+        }
+    } catch (error) {
+        throw new Error;
+    }
 };
 
-const addMovie = async (req, res) => {
-  try {
-    const body = req.body;
-    const error = await services.validateForm(body);
-console.log(error)
-    await services.addMovie(req.body);
-  } catch (error) {
-    res.render('error', {
-      error,
-    });
-  }
-};
+
+// Load edit page 
+const loadEditMoviePage = async (req, res) => {
+    try {
+        const movieID = req.params.movieID ? req.params.movieID : null;
+
+        const movieDetails = await service.getDetailsToEdit(movieID);
+
+        // validate Response
+        if (movieDetails.length < 0) {
+
+            throw new Error;
+        }
+
+        // render edit page with the movieDetails
+        res.render('edit', {
+            record: movieDetails,
+            movieID: movieID,
+        })
+    } catch (error) {
+        return res.render('error', {
+            error: {
+                message: 'An Error Occured!'
+            }
+        })
+    }
+}
+
+//
+const update = async (req, res) => {
+    try {
+        const movieID = req.params.movieID ? req.params.movieID : '';
+
+        const movieInput = req.body ? req.body : '';
+        const validation = await Joi.validateForm(movieInput);
+
+        if (validation.error) {
+            // If validation fails, return an error response to the client
+            const errorMessages = validation.error.details.map(detail => detail.message);
+
+            return res.status(400).json({
+                error: 'Validation Error',
+                details: errorMessages,
+            });
+        } else {
+
+            await service.updateMovie(movieID, movieInput);
+            return res.json({
+                redirectTo: '/'
+            })
+        }
+    } catch (error) {
+        res.render('error', {
+            error: {
+                message: 'An Error Occured'
+            }
+        })
+    }
+}
+
 
 const deleteMovie = async (req, res) => {
-  try {
-    const {
-      movieId,
-    } = req.params;
-    if (!movieId) {
-      throw new Error('Movie Does Not Exist!!');
-    }
+    try {
+        // URL parameter - ID of the movie to Delete
+        const movieID = req.params.movieID ? req.params.movieID : '';
 
-    await services.deleteMovie(movieId);
-    res.redirect(`/?${movieId}`);
-  } catch (er0ror) {
-    res.render('error', {
-      error,
-    });
-  }
-};
+        await service.deleteMovie(movieID);
 
-const loadDetailsToEdit = async (req, res) => {
-  const movieId = req.params.movieid;
-  try {
-    if (!movieId) {
-      throw new Error('Record Not Found');
-    } else {
-      const record = await services.getDetailsToEdit(movieId);
-      if (!record) {
-        throw new Error('Record Not Found');
-      }
-      const data = record.dataValues;
-      res.render('edit', {
-        record: data,
-        movieId,
-      });
+        res.redirect('/');
+    } catch (error) {
+        res.render('error', {
+            error: {
+                message: 'An Error Occured!'
+            }
+        })
     }
-  } catch (error) {
-    res.render('error', {
-      error,
-    });
-  }
-};
+}
 
-const updateMovie = async (req, res) => {
-  try {
-    const formData = req.body;
-    const movieID = req.query.movieId;
-    await services.updateMovie(formData, movieID);
-    res.redirect('/');
-  } catch (error) {
-    res.render('error', {
-      error,
-    });
-  }
-};
 
-const getMovieDetails = async (req, res) => {
-  try {
-    const movieId = req.params.movieid;
-    if (!movieId || typeof movieId === 'undefined') {
-      throw new Error('Invalid movieID!!!');
+const viewDetails = async (req, res) => {
+    try {
+        const movieID = req.params.movieID ? req.params.movieID : '';
+
+        // Details of the movie & reviews
+        const movieDetails = await service.getMovieDetails(movieID);
+        const reviews = await service.getReviews(movieID)
+
+        // throw an error if the MovieDetails obj is null or undefined
+        if (typeof movieDetails === 'undefined' || typeof reviews === 'undefined') {
+            throw new Error
+        }
+
+        res.render('details', {
+            movieDetails,
+            reviews: reviews
+        })
+    } catch (error) {
+        res.render('error', {
+            error: {
+                message: 'Movie Not Found!'
+            }
+        })
     }
-    const resp = await services.getMovieDetails(movieId);
-    if (!resp || !resp.dataValues || !resp.Reviews) {
-      throw new Error('Internal Server error');
+}
+
+const addNewReview = async (req, res) => {
+    try {
+        const movieID = req.params.movieID ? req.params.movieID : '';
+        const reviewInput = req.body ? req.body : '';
+        const validation = await Joi.validateReview(reviewInput);
+
+        if (validation.error) {
+            // If validation fails, return an error response to the client
+            const errorMessages = validation.error.details.map(detail => detail.message);
+
+            return res.status(400).json({
+                error: 'Validation Error',
+                details: errorMessages,
+            });
+        }
+
+        // If validation is successful, add the movie
+        else {
+            await service.addReviewToMovie(movieID, reviewInput.review);
+            res.json({
+                redirectTo: `/${movieID}/details`
+            });
+        }
+    } catch (error) {
+        res.render('error', {
+            error: {
+                message: 'Internal Server Error!'
+            }
+        })
     }
-    res.render('details', {
-      movieDetails: resp.dataValues,
-      reviews: resp.Reviews,
-    });
-  } catch (error) {
-    error = {
-      message: 'Movie Not Found!'
+}
+
+const deleteReview = async (req, res) => {
+    try {
+        // get Movie ID and Review ID from URL parameters
+        const movieID = req.params.movieID ? req.params.movieID : '';
+        const reviewID = req.params.reviewId ? req.params.reviewId : ''
+
+        await service.deleteReview(reviewID);
+        res.redirect(`/${movieID}/details`);
+    } catch (error) {
+        res.render('error', {
+            error: {
+                message: 'Internal Server Error!'
+            }
+        })
     }
-    res.render('error', error);
-  }
-};
+}
 
 module.exports = {
-  loadIndexPage,
-  addMovie,
-  deleteMovie,
-  loadDetailsToEdit,
-  updateMovie,
-  getMovieDetails,
-  loadAddMoviePage,
-};
+    addNewReview,
+    deleteReview,
+    loadIndexPage,
+    loadAddMoviePage,
+    addMovie,
+    loadEditMoviePage,
+    deleteMovie,
+    viewDetails,
+    update
+}

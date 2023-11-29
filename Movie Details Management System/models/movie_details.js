@@ -6,9 +6,7 @@ const {
   sequelize,
 } = require('../config/db');
 
-const {
-  Review,
-} = require('./review-model');
+
 
 const Movie = sequelize.define('Movie', {
   movie_id: {

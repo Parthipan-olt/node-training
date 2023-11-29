@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const MovieController = require('../api/controller/MovieController');
-const ReviewController = require('../api/controller/ReviewController')
 
 // '/' Route
 router.get('/', MovieController.loadIndexPage);
@@ -21,13 +20,13 @@ router.get('/:movieID/edit', MovieController.loadEditMoviePage);
 router.post('/:movieID/update', MovieController.update);
 
 // // add review
-router.post('/:movieID/add-review', ReviewController.addNewReview);
+router.post('/:movieID/add-review', MovieController.addNewReview);
 
 // // view details
 router.get('/:movieID/details', MovieController.viewDetails);
 
 // // delete review
-router.get('/:movieID/:reviewId/delete-review', ReviewController.deleteReview);
+router.get('/:movieID/:reviewId/delete-review', MovieController.deleteReview);
 
 
 module.exports = router;

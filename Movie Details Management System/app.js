@@ -58,7 +58,7 @@ const server = app.listen(port, (error) => {
   if (error) {
     res.status(500).render('error', error.message ? error.message : {
       error: {
-        message: 'Cannot Connect To DataBase!'
+        message: 'Error Connecting port!'
       },
 
     });
