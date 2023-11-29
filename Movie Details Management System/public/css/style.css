@@ -1,24 +1,84 @@
-body {
-  width: 100%;
-}
-
 a {
   text-decoration: none !important;
-  color: #fff;
   align-self: center;
   cursor: pointer;
+  color: #000
 }
 
 a:hover {
-  color: #fff;
+  text-decoration: none;
+  color: inherit;
 }
 
-label {
-  font-size: 16px;
-  font-weight: 600;
-  align-self: flex-end;
-  width: 20%;
-  display: inline;
+/* ===============INDEX PAGE=============== */
+.index table {
+  table-layout: fixed;
+  text-overflow: ellipsis;
+}
+
+.index th,
+.index td {
+  padding: 3px 15px;
+  word-wrap: break-word;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+  max-width: 40px !important;
+}
+
+
+.index th {
+  position: sticky;
+  top: 0;
+  background-color: #007bff;
+  color: #fff;
+  border: solid 1px #fff;
+}
+
+.index td {
+  border-inline: solid 1px #007bff;
+}
+
+
+.details td {
+  padding-block: 10px;
+  color: #007bff;
+}
+
+.index .main-container {
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+  height: 70vh;
+}
+
+.details .main-container {
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+  height: auto;
+}
+
+.bold-font {
+  color: #000 !important;
+  width: 25%;
+}
+
+.review-container {
+  border-top: solid 1px #007bff;
+}
+
+.index .table-container {
+  position: relative;
+  overflow-y: auto;
+  height: 80%;
+}
+
+/* View, Edit, Delete Buttons - List page */
+.table-container td a {
+  width: 30%;
+  padding: 2px 5px;
+  word-wrap: normal;
+  font-size: 13px;
+  display: inline-block;
+  border-radius: 2px !important;
 }
 
 /* Disable spin buttons of number feild */
@@ -36,83 +96,16 @@ select {
   padding: 5px
 }
 
-/* List page table*/
-table {
-  word-wrap: break-word !important;
-  max-width: 100%;
-  white-space: balance;
-}
-
-td,
-th {
-  padding: 5px !important;
-  width: 200px !important;
-  max-width: 200px !important;
-
-}
-
-/* View, Edit, Delete Buttons - List page */
-td a {
-  width: 30%;
-  padding: 2px 5px;
-  word-wrap: normal;
-  font-size: 13px;
-  display: inline-block;
-  border-radius: 2px !important;
-}
-
-/* span - movie details - details page */
-span {
-  width: 75%;
-  display: inline-block;
-  vertical-align: text-top !important;
-  margin-bottom: 15px;
-}
-
-/* navigation link - jump to pages */
-.nav {
-  width: fit-content !important;
-}
-
-.details {
-  width: 80%;
-  margin: 50px auto;
-  vertical-align: text-top !important;
-  word-wrap: break-word;
-}
-
-/* lables for the details */
-.details p {
-  align-self: self-start;
-  display: inline-block !important;
-  width: 25%;
-}
 
 /* delete review  button icon */
 .trash-icon {
   font-size: 12px;
 }
 
-.reviews i {
-  color: #000;
-  font-size: 100%;
-}
-
-/* p - reviews- details page */
-.review p {
-  display: inline;
-  width: 100%;
-}
-
-.add-review a {
-  color: #308d37;
-  border: solid 2px #308d37;
-}
 
 /* input for review */
 .review-input-div {
   position: relative;
-  display: none;
 }
 
 /* submit button for review */

@@ -6,9 +6,11 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
     integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-  <title>Document</title>
+  <title>Movie Details Management System</title>
   <link rel="stylesheet" href="/css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
 
@@ -30,7 +32,6 @@
           cancelButtonColor: '#3085d6',
         }).then(async (result) => {
           if (result.isConfirmed) {
-            await Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
             window.location.href = `/${movieId}/delete-movie`;
           } else {
             Swal.fire('Cancelled', 'Your file is safe :)', 'info');
@@ -47,65 +48,87 @@
 </head>
 
 <body>
-  <div class="mb-4">
+
+  <div class="container-fluid index">
+    <!-- ==== HEADER ==== -->
     <header>
-      <div class=" py-3 bg-primary ">
-        <div> <a href="/">
-            <h1 class="col-xl-12 col-lg-12 col-md-12 col-sm-12 my-0 text-white">Movie Details Management
-              System
-            </h1>
-          </a></div>
-      </div>
-      <div class="d-flex justify-content-end w-100 text-right mt-2">
-        <a class="details bg-primary p-1 rounded nav m-0 mr-3 d-inline-block" href="/add-movie">Add Movie</a>
+      <div class="header-container d-flex flex-wrap justify-content-center border-bottom mb-5">
+        <a href="/">
+          <div class="logo-container d-flex " style="gap:10px">
+            <!-- == add icon == -->
+
+            <div style="vertical-align: sub;font-size: 26px;">
+              <i class="fa fa-film" aria-hidden="true"></i>
+            </div>
+
+            <div>
+              <h2>MDMS</h2>
+            </div>
+          </div>
+        </a>
       </div>
     </header>
 
+
+    <!-- ==== MAIN ====-->
     <main>
-      <div class="px-0 table-responsive text-center">
-        <table class="table table-bordered table-striped mt-5 ">
-          <thead>
-            <tr class="bg-secondary text-white">
-              <th class="table-col">Title</th>
-              <th>Genre</th>
-              <th>Director</th>
-              <th>Runtime(mins)</th>
-              <th>Release Date/year</th>
-              <th>Review Count</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
+      <div class=" main-container w-75 m-auto p-5 rounded border mt-5">
 
-          <tbody>
-            <% if (records.length > 0) { %>
-            <% records.forEach((element) => { %>
-            <tr>
-              <td class="table-col"><%= element.title %></td>
-              <td><%= element.genre %></td>
-              <td><%= element.director %></td>
-              <td><%= element.runtime %></td>
-              <td><%= element.release_date %></td>
-              <td><%= element.dataValues.review_count %></td>
-              <td class="text-center">
-                <a href="/<%= element.movie_id %>/details
-                  " class=" btn-primary py-0">View</a>
-                <a href="/<%= element.movie_id %>/edit" class="btn-success py-0 edit-button">Edit</a>
-                <a data-movieid="<%= element.movie_id %>" class="btn-danger py-0 delete-button">Delete</a></td>
-            </tr>
-            <% }) %>
-            <% }else{%>
-            <tr>
-              <td colspan="7">No results found!!!</td>
-            </tr>
-            <%  } %>
-          </tbody>
-        </table>
+        <div class="header-section d-flex justify-content-between border-bottom mb-5 pb-3">
+          <div class="title-container">
+            <h4>List Of Available Movies</h4>
+          </div>
+
+          <div class="add-new-button-container">
+            <a class="btn btn-success" href="/add-movie">Add Movie</a>
+          </div>
+        </div>
 
 
+        <div class="table-container border-top ">
+          <table class="table-striped w-100 table-scroll">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Genre</th>
+                <th>Director</th>
+                <th>Runtime <span style="font-size: small;"> (mins)</span></th>
+                <th>Release Date</th>
+                <th>Review Count</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+
+            <tbody class="tbody">
+              <% if (records.length > 0) { %>
+              <% records.forEach((element) => { %>
+              <tr>
+                <td class="table-col"><%= element.title %></td>
+                <td><%= element.genre %></td>
+                <td><%= element.director %></td>
+                <td><%= element.runtime %></td>
+                <td><%= element.release_date %></td>
+                <td><%= element.dataValues.review_count %></td>
+                <td class="text-center">
+                  <a href="/<%= element.movie_id %>/details" class=" btn-primary py-0" title="Details"><i
+                      class="fa fa-eye" aria-hidden="true"></i></a>
+                  <a href="/<%= element.movie_id %>/edit" class="btn-success py-0 edit-button" title="Edit"><i
+                      class="fa fa-pencil" aria-hidden="true"></i></a>
+                  <a data-movieid="<%= element.movie_id %>" class="btn-danger py-0 delete-button" title="Delete"><i
+                      class="fa fa-trash"></i></a></td>
+              </tr>
+              <% }) %>
+              <% }else{%>
+              <tr>
+                <td colspan="7">No results found!!!</td>
+              </tr>
+              <%  } %>
+            </tbody>
+          </table>
+        </div>
       </div>
     </main>
   </div>
-
 </body>
 
 </html>

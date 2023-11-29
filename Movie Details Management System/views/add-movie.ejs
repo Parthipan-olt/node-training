@@ -5,55 +5,66 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Movie Details Management System</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
     integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
-  <link rel="stylesheet" href="css/style.css">
-  <script src="javascripts/script.js" defer></script>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/javascripts/script.js" defer></script>
 </head>
 
 <body>
-  <div class="mb-4 mb-4">
+  <div class="container-fluid  details ">
     <header>
-      <div class=" py-3 bg-primary ">
-        <div> <a href="/">
-            <h1 class="col-xl-12 col-lg-12 col-md-12 col-sm-12 my-0 text-white">Movie Details Management
-              System
-            </h1>
-          </a></div>
-      </div>
-      <div class="d-flex justify-content-end w-100 text-right mt-2" >
-        <a class="details bg-primary p-1 rounded nav m-0 mr-3 d-inline-block" href="/">Home</a>
+      <div class="header-container d-flex flex-wrap justify-content-center border-bottom mb-5">
+        <a href="/">
+          <div class="logo-container d-flex " style="gap:10px">
+            <!-- == add icon == -->
+
+            <div style="vertical-align: sub;font-size: 26px;">
+              <i class="fa fa-film" aria-hidden="true"></i>
+            </div>
+
+            <div>
+              <h2>MDMS</h2>
+            </div>
+          </div>
+        </a>
       </div>
     </header>
 
+
     <main>
-      <div class="my-4 container">
-        <div class="row">
-          <form id="addNewMovie" action="/add-movie" method="POST" name="movieForm">
+     <div class="main-container w-75 m-auto p-5 rounded border mt-5">
+          <div class="d-flex justify-content-end">
+            <a href="/" class="btn btn-primary "> Home</a>
+          </div>
+          <form id="addNewMovie" action="/add-movie" name="movieForm">
 
             <div class="col-xl-12 ">
               <h3 class="mb-5">Add a movie</h3>
 
               <label for="movieTitle">Title</label>
-              <input type="text" id="title" name="title" maxlength="100" >
+              <input type="text" id="title" name="title" maxlength="100">
 
               <label for="movieDescription">Description</label>
-              <input type="text" id="movieDescription"  name="description" maxlength="100" required>
+              <input type="text" id="movieDescription" name="description" maxlength="100">
 
               <label for="director">Director</label>
-              <input type="text" id="director" name="director" maxlength="100" required>
+              <input type="text" id="director" name="director" maxlength="100">
 
               <label for="releaseYear">Release Date/Year</label>
-              <input type="date" id="releaseYear" name="releaseDate" required min="1895-10-28">
+              <input type="date" id="releaseYear" name="releaseDate" min="1895-10-28">
 
 
               <label for="language">Language</label>
-              <input type="text" id="language" maxlength="20" name="language" required>
+              <input type="text" id="language" maxlength="20" name="language">
 
               <label for="genres">Genre</label>
-              <select name="genre" id="genres" required>
+              <select name="genre" id="genres">
                 <option value="" disabled selected>Choose an Option</option>
                 <option value="Action">Action</option>
                 <option value="Drama">Drama</option>
@@ -63,14 +74,17 @@
               </select>
 
               <label for="runtime">Runtime(mins)</label>
-              <input type="number" id="runtime" min="0" max="99999" name="runtime" required>
+              <input type="number" id="runtime" min="0" max="99999" name="runtime">
 
               <div class="d-flex justify-content-end">
+                <a href="/" class="btn btn-white border">Cancel</a>
+                <button class="btn btn-danger text-white reset mx-2" type="reset">
+                  Reset
+                </button>
                 <button class="btn btn-primary" type="submit">Submit</button></div>
             </div>
 
           </form>
-        </div>
       </div>
     </main>
   </div>

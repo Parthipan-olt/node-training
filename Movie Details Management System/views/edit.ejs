@@ -3,61 +3,74 @@
 
 <head>
   <meta charset="UTF-8">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
     integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-  <title>Movie Details Management System</title>
-  <link rel="stylesheet" href="/css/style.css"><script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
-  <script src="/t
-  tjavascripts/script.js" defer></script>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/javascripts/script.js" defer></script>
 </head>
 
 <body>
-  <div class="mb-4 mb-4">
+  <div class="container-fluid  details m-0">
+
     <header>
-      <div class=" py-3 bg-primary ">
-        <div> <a href="/">
-            <h1 class="col-xl-12 col-lg-12 col-md-12 col-sm-12 my-0 text-white">Movie Details Management
-              System
-            </h1>
-          </a></div>
-      </div>
-      <div class="d-flex justify-content-end w-100 text-right mt-2" >
-        <a class="details bg-primary p-1 rounded nav m-0 mr-3 d-inline-block" href="/">Home</a>
+      <div class="header-container d-flex flex-wrap justify-content-center border-bottom mb-5">
+        <a href="/">
+          <div class="logo-container d-flex " style="gap:10px">
+            <!-- == add icon == -->
+
+            <div style="vertical-align: sub;font-size: 26px;">
+              <i class="fa fa-film" aria-hidden="true"></i>
+            </div>
+
+            <div>
+              <h2>MDMS</h2>
+            </div>
+          </div>
+        </a>
       </div>
     </header>
 
+
     <main>
-      <div class="mt-4 container">
+      <div class="main-container w-75 m-auto p-5 rounded border mt-5">
+
+        <div class="d-flex justify-content-end">
+          <a href="/" class="btn btn-primary "> Home</a>
+        </div>
         <% if (record) { %>
         <div class="row">
 
 
-          <form action="/edit-movie-details?movieId=<%= movieId %>" method="POST" name="movieForm" id="editMovie">
+          <form action="/<%= movieId %>/update" id="editMovie">
             <div class="col-xl-12 justify-content-between">
               <h3 class="mb-5">Edit Details</h3>
 
               <label for="movieTitle">Title</label>
-              <input type="text" id="movieTitle" value="<%= record.title %>" name="title" required>
+              <input type="text" id="movieTitle" value="<%= record.title %>" name="title" >
 
               <label for="movieDescription">Description</label>
               <input type="text" id="movieDescription" maxlength="20" value="<%= record.description %>"
-                name="description" required>
+                name="description" >
 
               <label for="director">Director</label>
-              <input type="text" id="director" value="<%= record.director %>" name="director" required>
+              <input type="text" id="director" value="<%= record.director %>" name="director" >
 
               <label for="releaseYear">Release Date/Year</label>
-              <input type="date" id="releaseYear" name="releaseDate" value="<%= record.release_date %>" required
+              <input type="date" id="releaseYear" name="releaseDate" value="<%= record.release_date %>" 
                 min="1895-10-28">
 
               <label for="language">Language</label>
-              <input type="text" id="language" maxlength="10" value="<%= record.language %>" name="language" required>
+              <input type="text" id="language" maxlength="10" value="<%= record.language %>" name="language" >
               <% let genre = record.genre %>
               <label for="genres">Genre</label>
-              <select name="genre" id="genres" required>
+              <select name="genre" id="genres" >
                 <option value="" disabled <% if (!genre) { %>selected<% } %>>Choose an Option</option>
                 <option value="Action" <% if (genre === 'Action') { %>selected<% } %>>Action</option>
                 <option value="Drama" <% if (genre === 'Drama') { %>selected<% } %>>Drama</option>
@@ -67,9 +80,14 @@
               </select>
 
               <label for="runtime">Runtime(mins)</label>
-              <input type="number" id="runtime" min="0" max="99999" value="<%= record.runtime %>" name="runtime" required>
+              <input type="number" id="runtime" min="0" max="99999" value="<%= record.runtime %>" name="runtime"
+                >
 
               <div class="d-flex justify-content-end">
+                <a href="/" class="btn btn-white border">Cancel</a>
+                <button class="btn btn-danger text-white reset mx-2" type="reset">
+                  Reset
+                </button>
                 <button class="btn btn-primary " type="submit">Update</button></div>
             </div>
           </form>

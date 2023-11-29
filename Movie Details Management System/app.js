@@ -31,7 +31,7 @@ app.use(express.urlencoded({
 app.use(express.static(path.join(__dirname, 'public')));
 
 // page not found error
-app.use((req, res, next) => {
+app.use(( req, res, next) => {
   res.status(404).render('error', {
     error: {
       message: 'Page Not Found'
@@ -41,16 +41,25 @@ app.use((req, res, next) => {
 });
 
 // Custom error handling for other errors
-app.use((error, req, res) => {
+app.use((error, req, res, next) => {
+
   res.status(500).render('error', {
-    error:{message:'An error Occured!'},
+    error: {
+      message: 'Internal Server Error'
+    },
   });
+  next();
 });
 
 // listen to port
 const server = app.listen(port, (error) => {
   if (error) {
-    console.error('Error starting the server:', error);
+    res.status(500).render('error', error.message ? error.message : {
+      error: {
+        message: 'Cannot Connect To DataBase!'
+      },
+
+    });
   } else {
     console.log(`Server is running on port ${port}`);
   }
